@@ -1,9 +1,12 @@
+import DefaultTheme from "./config/theme/DefaultTheme";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <>
-      <AppRoutes />
+      <DefaultTheme>
+        <AppRoutes />
+      </DefaultTheme>
     </>
   );
 }
