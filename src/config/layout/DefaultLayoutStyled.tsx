@@ -7,6 +7,8 @@ const DefaultLayoutStyled = styled.main`
     justify-content: space-between;
     height: 100%;
     align-items: center;
+    margin: 0;
+    padding: 0;
 
 `;
 
