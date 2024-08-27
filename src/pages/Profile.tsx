@@ -1,7 +1,26 @@
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ButtonReturn from "../components/ButtonReturn/ButtonReturn";
+
 function Profile() {
   return (
-    <div style={{ width: "60vw", height: "100vh", backgroundColor: "#fff", color: "black", border: '0.5px solid #DCDCDC'}}>
-      <div style={{ width: "100%", height: "30%", boxSizing: "border-box", padding: "5px", borderBottom: '0.5px solid #DCDCDC'}}>
+    <div
+      style={{
+        width: "60vw",
+        height: "100vh",
+        backgroundColor: "#fff",
+        color: "black",
+        border: "0.5px solid #DCDCDC",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "30%",
+          boxSizing: "border-box",
+          padding: "5px",
+          borderBottom: "0.5px solid #DCDCDC",
+        }}
+      >
         <div
           style={{
             width: "100%",
@@ -11,17 +30,20 @@ function Profile() {
         >
           <div
             style={{
-              width: "10%",
+              width: "5%",
               height: "100%",
-              display: "grid",
-              placeItems: "center",
+              display: "flex",
+              justifyContent: 'start',
+              alignItems: 'center'
             }}
           >
-            Botão Voltar
+            <ButtonReturn>
+              <ArrowBackIcon htmlColor="#000000" />
+            </ButtonReturn>
           </div>
           <div
             style={{
-              width: "90%",
+              width: "95%",
               height: "100%",
               display: "flex",
               justifyContent: "center",
@@ -29,8 +51,19 @@ function Profile() {
               flexDirection: "column",
             }}
           >
-            <p style={{fontSize: '18px', fontWeight: '500', margin: '0px'}}>Perfil de @daphne</p>
-            <p style={{fontSize: '14px', fontWeight: '400', color: '#848484', margin: '0px'}}>X tweets</p>
+            <p style={{ fontSize: "18px", fontWeight: "700", margin: "0px" }}>
+              Perfil de @daphne
+            </p>
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#848484",
+                margin: "0px",
+              }}
+            >
+              X tweets
+            </p>
           </div>
         </div>
         <div
@@ -51,15 +84,11 @@ function Profile() {
               border: "3px solid gray",
             }}
           />
-            <p style={{ margin: "0px" }}>Nome</p>
-            <p style={{ margin: "0px" }}>@perfil</p>
+          <p style={{ margin: "0px", fontWeight:'500' }}>Daphne Dog</p>
+          <p style={{ margin: "0px", fontWeight: '500' }}>@perfil</p>
         </div>
       </div>
-      <div
-        style={{ width: "100%", height: "70%"}}
-      >
-        Tweets
-      </div>
+      <div style={{ width: "100%", height: "70%" }}>Tweets</div>
     </div>
   );
 }
