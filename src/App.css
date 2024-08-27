@@ -44,3 +44,7 @@
   color: #888;
 }
 
+body{
+  padding: 0;
+  margin: 0;
+};
