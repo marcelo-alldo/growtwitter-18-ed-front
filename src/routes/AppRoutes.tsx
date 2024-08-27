@@ -2,10 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Error404 from '../pages/Error404';
-<<<<<<< HEAD
 import CreateAccount from '../pages/CreateAccount';
-=======
->>>>>>> feature/create-modal
 
 const router = createBrowserRouter([
   {
@@ -13,19 +10,12 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error404 />,
   },
-<<<<<<< HEAD
+  // {
+  //   path: '/perfil',
+  //   element: <Perfil />,
+  //   errorElement: <Error404 />,
+  // },
   {
-<<<<<<< HEAD
-    path: '/perfil',
-    element: <Perfil />,
-    errorElement: <Error404 />,
-  },
-=======
-
->>>>>>> feature/add-layout-main
-  {
-=======
->>>>>>> feature/create-modal
     path: '/',
     element: <Home />,
   },
