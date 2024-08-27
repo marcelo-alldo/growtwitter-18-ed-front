@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-const DefaultLayoutStyled = <styled className="main"></styled>`
+const DefaultLayoutStyled = styled.main`
 
     display: flex;
     flex-direction: row;

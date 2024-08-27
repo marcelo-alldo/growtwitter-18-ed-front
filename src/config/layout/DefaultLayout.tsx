@@ -12,11 +12,11 @@ interface DefaultLayoutProps {
   };
 }
 
-function DefaultLayout({ children}: DefaultLayoutProps) {
+function DefaultLayout({children}: DefaultLayoutProps) {
   return (
     <DefaultLayoutStyled>
         <HeaderStyled />
-        <MainStyled/>
+        <MainStyled >{children}</MainStyled>
         <FooterStyled/>
     </DefaultLayoutStyled>
   );

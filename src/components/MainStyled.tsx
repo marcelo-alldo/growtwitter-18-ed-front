@@ -2,8 +2,8 @@ import { styled } from 'styled-components';
 
 const MainStyled = styled.header`
 
-    width: 50%;
-    border: #e70e0e 2px;
+    width: 50vw;
+    height: 100vh;
 
 `
 
