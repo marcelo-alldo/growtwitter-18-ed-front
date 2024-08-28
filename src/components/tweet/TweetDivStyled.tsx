@@ -15,6 +15,7 @@ const TweetDivStyled = styled.div`
     padding: 5px;
     display: flex;
     align-items: center;
+    font-size: 14px;
     &:hover {
       cursor: pointer;
     }
