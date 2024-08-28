@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 * {
   margin: 0;
   padding: 0;
@@ -12,18 +10,13 @@ ul {
 a {
   text-decoration: none;
 }
-=======
-<<<<<<< HEAD
-body{
-  padding: 0;
-  margin: 0;
-};
-=======
->>>>>>> feature/create-modal
->>>>>>> 0f76f4ba04c464ccee50ff67a7e41008d57f8efd
-=======
+
 body {
   padding: 0;
   margin: 0;
 }
->>>>>>> f4b6cd5cfe537520c8c408a039f24fbd0dc4df6e
+
+body {
+  padding: 0;
+  margin: 0;
+}
