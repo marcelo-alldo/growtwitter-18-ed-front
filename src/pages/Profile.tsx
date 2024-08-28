@@ -1,12 +1,21 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ButtonReturn from '../components/ButtonReturn/ButtonReturn';
 import DefaultLayout from '../config/layout/DefaultLayout';
+import { useEffect, useState } from 'react';
 
 function Profile() {
+  const [tweetsUser, setTweetsUser] = useState<any>(undefined);
+
   const config = {
     navigation: true,
     footer: true,
   };
+
+  useEffect(() => {
+    async function getTweets(id: string){
+      
+    }
+  })
 
   return (
     <DefaultLayout config={config}>
