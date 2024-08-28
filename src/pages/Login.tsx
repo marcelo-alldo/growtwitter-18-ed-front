@@ -36,7 +36,7 @@ function Login() {
           <h2 style={{ paddingTop: '50px', paddingLeft: '10px', paddingRight: '10px', fontSize: '3em', margin: '0' }}>
             Growtwitter
           </h2>
-          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1em' }}>
+          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.2em' }}>
             Trabalho final do bloco intermediário
           </small>
           <p style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.5em' }}>
@@ -72,7 +72,7 @@ function Login() {
             />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-            <label style={{ fontSize: '1.2em', color: 'grey', alignSelf: 'start' }} htmlFor="password">
+            <label style={{ fontSize: '1.5em', color: 'grey', alignSelf: 'start' }} htmlFor="password">
               Password
             </label>
             <input
