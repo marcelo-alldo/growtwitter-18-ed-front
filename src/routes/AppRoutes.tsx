@@ -10,15 +10,15 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error404 />,
   },
-<<<<<<< HEAD
-  {
-    path: '/perfil',
-    element: <Perfil />,
-    errorElement: <Error404 />,
-  },
-=======
+// <<<<<<< HEAD
+//   {
+//     path: '/perfil',
+//     element: <Perfil />,
+//     errorElement: <Error404 />,
+//   },
+// =======
 
->>>>>>> feature/add-layout-main
+// >>>>>>> feature/add-layout-main
   {
     path: '/',
     element: <Home />,
