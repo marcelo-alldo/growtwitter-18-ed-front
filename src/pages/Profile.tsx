@@ -2,7 +2,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ButtonReturn from '../components/ButtonReturn/ButtonReturn';
 import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
-import doGet from '../services/api'
+import { doGet } from '../services/api';
 
 interface ProfileProps{
   id: string
@@ -17,7 +17,7 @@ function Profile({id}:ProfileProps) {
   };
 
   useEffect(() => {
-    const tokenFalso = 'token'
+    const tokenFalso = '87f85a3d-850e-4a41-9122-c4954edd4631' // token do usuario admin@hotmail.com
     async function getTweets(idUsuario: string){
       const response = await doGet(`/tweet/${idUsuario}`, `${tokenFalso}`) // Adicionar token que vem do UserContext.token
       
