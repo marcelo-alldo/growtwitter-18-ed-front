@@ -3,19 +3,20 @@ import { styled } from 'styled-components';
 interface AvatarProps {
   border: Boolean;
   width: boolean;
-  url: string;
+  src: string;
 }
 
-const AvatarStyled = styled.div<AvatarProps>`
-  width: ${props => (props.width ? '3rem' : '6rem')};
+const AvatarStyled = styled.img<AvatarProps>`
+  width: ${props => (props.width ? '3.5rem' : '6rem')};
   border: ${props => (props.border ? 'none' : '2px solid black')};
   border-radius: 10rem;
+  align-self: flex-start;
 `;
 
-function Avatar({ border, width, url }: AvatarProps) {
+function Avatar({ border, width, src }: AvatarProps) {
   return (
     <>
-      <AvatarStyled url={`https://www.gravatar.com/avatar/${url}?d=robohash`} border={border} width={width} />
+      <AvatarStyled src={`https://www.gravatar.com/avatar/${src}?d=robohash`} border={border} width={width} />
     </>
   );
 }

@@ -3,6 +3,7 @@ import doGet from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
+import Avatar from '../Avatar';
 
 function Tweet() {
   async function getTweets() {
@@ -18,7 +19,7 @@ function Tweet() {
         {tweet.map(item => {
           return (
             <TweetDivStyled>
-              <img className="user-image" src={`https://www.gravatar.com/avatar/${item.id}?d=robohash`} />
+              <Avatar border={true} width={true} src={item.id} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <b>{item.name}</b>
