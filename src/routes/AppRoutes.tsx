@@ -7,6 +7,31 @@ import CreateAccount from "../pages/CreateAccount";
 
 const router = createBrowserRouter([
   {
+<<<<<<< HEAD
+=======
+    path: '/login',
+    element: <Login />,
+    errorElement: <Error404 />,
+  },
+<<<<<<< HEAD
+// <<<<<<< HEAD
+//   {
+//     path: '/perfil',
+//     element: <Perfil />,
+//     errorElement: <Error404 />,
+//   },
+// =======
+
+// >>>>>>> feature/add-layout-main
+=======
+  // {
+  //   path: '/perfil',
+  //   element: <Perfil />,
+  //   errorElement: <Error404 />,
+  // },
+>>>>>>> 0f76f4ba04c464ccee50ff67a7e41008d57f8efd
+  {
+>>>>>>> development
     path: '/',
     element: <Home />,
     errorElement: <Error404/>
