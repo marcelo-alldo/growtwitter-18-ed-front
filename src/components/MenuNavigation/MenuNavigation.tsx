@@ -1,7 +1,8 @@
-import MenuItem from "./MenuItem";
-import iconPageInitial from "../../../public/icone_pagina inicial_selecionado.svg"
-import iconPageExplorer from "../../../public/icone_explorar_selecionado.svg"
-import iconPageProfile from "../../../public/icone_perfil.svg"
+import MenuItem from './MenuItem';
+import iconPageInitial from '../../../public/icone_pagina inicial_selecionado.svg';
+import iconPageExplorer from '../../../public/icone_explorar_selecionado.svg';
+import iconPageProfile from '../../../public/icone_perfil.svg';
+import ButtonDefault from '../button/ButtonDefault';
 
 function MenuNavigation() {
   return (
@@ -12,13 +13,13 @@ function MenuNavigation() {
         </div>
         <div>
           <nav>
-            <MenuItem icon={iconPageInitial} label="Página Inicial" route="/"/>
-            <MenuItem icon={iconPageExplorer} label="Explorar" route="/"/>
-            <MenuItem icon={iconPageProfile} label="Perfil" route="/"/>
+            <MenuItem icon={iconPageInitial} label="Página Inicial" route="/" />
+            <MenuItem icon={iconPageExplorer} label="Explorar" route="/" />
+            <MenuItem icon={iconPageProfile} label="Perfil" route="/" />
           </nav>
         </div>
         <div>
-          <button>Tweetar</button>
+          <ButtonDefault label="Tweetar" />
         </div>
       </div>
 
@@ -31,7 +32,7 @@ function MenuNavigation() {
           </div>
         </div>
         <div>
-            <button>Sair</button>
+          <button>Sair</button>
         </div>
       </div>
     </div>
