@@ -10,7 +10,6 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error404 />,
   },
-<<<<<<< HEAD
 
 //   {
 //     path: '/perfil',
@@ -20,13 +19,6 @@ const router = createBrowserRouter([
 // =======
 
 
-=======
-  // {
-  //   path: '/perfil',
-  //   element: <Perfil />,
-  //   errorElement: <Error404 />,
-  // },
->>>>>>> development
   {
     path: '/',
     element: <Home />,
