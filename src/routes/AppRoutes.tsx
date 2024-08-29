@@ -20,6 +20,11 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: '/explore',
+    element: <Explore />,
+    errorElement: <Error404 />,
+  },
+  {
     path: '/create-account',
     element: <CreateAccount />,
   },
