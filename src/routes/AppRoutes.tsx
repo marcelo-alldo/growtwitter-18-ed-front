@@ -10,11 +10,15 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error404 />,
   },
-  // {
-  //   path: '/perfil',
-  //   element: <Perfil />,
-  //   errorElement: <Error404 />,
-  // },
+
+//   {
+//     path: '/perfil',
+//     element: <Perfil />,
+//     errorElement: <Error404 />,
+//   },
+// =======
+
+
   {
     path: '/',
     element: <Home />,
