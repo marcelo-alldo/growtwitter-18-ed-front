@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LoginButtonStyled = styled.button`
+const ButtonDefaultStyled = styled.button`
   width: 21vw;
   height: 35px;
   border-radius: 7px;
@@ -9,4 +9,4 @@ const LoginButtonStyled = styled.button`
   font-size: 1.2rem;
 `;
 
-export default LoginButtonStyled;
+export default ButtonDefaultStyled;
