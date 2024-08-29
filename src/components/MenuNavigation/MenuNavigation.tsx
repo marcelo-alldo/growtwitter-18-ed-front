@@ -1,3 +1,8 @@
+import MenuItem from "./MenuItem";
+import iconPageInitial from "../../../public/icone_pagina inicial_selecionado.svg"
+import iconPageExplorer from "../../../public/icone_explorar_selecionado.svg"
+import iconPageProfile from "../../../public/icone_perfil.svg"
+
 function MenuNavigation() {
   return (
     <div className="container">
@@ -7,11 +12,9 @@ function MenuNavigation() {
         </div>
         <div>
           <nav>
-            <ul>
-              <li>Pagina Inicial</li>
-              <li>Explorar</li>
-              <li>Perfil</li>
-            </ul>
+            <MenuItem icon={iconPageInitial} label="Página Inicial" route="/"/>
+            <MenuItem icon={iconPageExplorer} label="Explorar" route="/"/>
+            <MenuItem icon={iconPageProfile} label="Perfil" route="/"/>
           </nav>
         </div>
         <div>
