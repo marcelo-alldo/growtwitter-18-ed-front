@@ -18,15 +18,12 @@ function Login() {
 
     const response = await doPost('/auth', { email, password }, '');
 
-    console.log(response.data);
-
-    const dataLogin = {
-      email,
-      token: response.data.token,
-    };
-
     if (response.success) {
-      console.log(response);
+      const dataLogin = {
+        email,
+        token: response.data.token,
+      };
+
       localStorage.setItem('userLogged', JSON.stringify(dataLogin));
       navigate('/');
     }
