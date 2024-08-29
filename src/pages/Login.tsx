@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginInputStyled from '../components/login/LoginInputStyled';
-import LoginButtonDefault from '../components/login/LoginButtonDefault';
+import ButtonDefault from '../components/button/ButtonDefault';
 import H2Styled from '../components/login/H2Styled';
 import LabelStyled from '../components/login/LabelStyled';
 import { useNavigate } from 'react-router-dom';
@@ -86,10 +86,10 @@ function Login() {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <LabelStyled htmlFor="user">Email</LabelStyled>
             <LoginInputStyled type="text" value={email} onChange={ev => setEmail(ev.target.value)} />
-            <LabelStyled htmlFor="password">Password</LabelStyled>
+            <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <LoginButtonDefault label="Entrar" action={handleLogin} />
+          <ButtonDefault label="Entrar" action={handleLogin} />
         </div>
       </div>
     </div>
