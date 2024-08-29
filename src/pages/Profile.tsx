@@ -17,9 +17,10 @@ function Profile() {
   };
 
   useEffect(() => {
-    const tokenFalso = '2240d80b-b365-4260-8afc-29d6a0200afc'; // token do usuario admin@hotmail.com
+    const tokenFalso = '48d3b35b-12d2-43a6-a76d-5ea9335e38b8'; // token do usuario admin@hotmail.com
     async function getTweets() {
       const response = await doGet(`/tweet/${idUser}`, `${tokenFalso}`); // Adicionar token que vem do UserContext.token
+      console.log(response)
       if (response.success) {
         console.log(response.data);
         setTweetsUser(response.data);
