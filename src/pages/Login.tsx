@@ -22,7 +22,7 @@ function Login() {
 
     const dataLogin = {
       email,
-      password,
+      token: response.data.token,
     };
 
     if (response.success) {
