@@ -15,7 +15,7 @@ async function doPost(url: string, data: any, token: string) {
     return { success: false, msg: 'Post Error' };
   } catch (error) {
     /*ESSE ERRO NÃO AFETA O CODIGO.*/
-    if ((error?.response?.status = 401)) {
+    if ((error.response.status = 401)) {
       auth = false;
     }
     return { success: false, msg: 'Post Error', auth };
@@ -33,7 +33,7 @@ async function doGet(url: string, token: string) {
     }
     return { success: false, msg: 'Get Error', auth: true };
   } catch (error) {
-    if ((error?.response?.status = 401)) {
+    if ((error.response.status = 401)) {
       auth = false;
     }
     return { success: false, msg: 'Get Error', auth };

@@ -4,11 +4,12 @@ import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
 import { doGet } from '../services/api';
 
-interface ProfileProps{
-  id: string
-}
+// interface ProfileProps{
+//   id: string
+// }
 
-function Profile({id}:ProfileProps) {
+function Profile() {
+  const [reRenderComponent, setReRenderComponent] = useState<boolean>(false);
   const [tweetsUser, setTweetsUser] = useState<any>(undefined);
 
   const config = {
@@ -16,14 +17,22 @@ function Profile({id}:ProfileProps) {
     footer: true,
   };
 
+  function ReRender() {
+    setReRenderComponent(!reRenderComponent);
+  }
+
   useEffect(() => {
-    const tokenFalso = '87f85a3d-850e-4a41-9122-c4954edd4631' // token do usuario admin@hotmail.com
-    async function getTweets(idUsuario: string){
-      const response = await doGet(`/tweet/${idUsuario}`, `${tokenFalso}`) // Adicionar token que vem do UserContext.token
-      
+    const idUsuario = '795ff54c-7e20-472e-a26c-8ed2700e6bd9';
+    const tokenFalso = '87f85a3d-850e-4a41-9122-c4954edd4631'; // token do usuario admin@hotmail.com
+    async function getTweets(idUsuario: string) {
+      const response = await doGet(`/tweet/${idUsuario}`, `${tokenFalso}`); // Adicionar token que vem do UserContext.token
+      if (response.success) {
+        setTweetsUser(response.data);
+        return;
+      }
     }
-    getTweets(id)
-  })
+    getTweets(idUsuario);
+  });
 
   return (
     <DefaultLayout config={config}>
@@ -110,7 +119,15 @@ function Profile({id}:ProfileProps) {
             <p style={{ margin: '0px', fontWeight: '500' }}>@perfil</p>
           </div>
         </div>
-        <div style={{ width: '100%', height: '70%' }}>Tweets</div>
+        <div style={{ width: '100%', height: '70%' }}>
+          {tweetsUser.map((item: any) => (
+            <div>
+              {item.userId}
+              {item.content}
+              {item.created_at}
+            </div>
+          ))}
+        </div>
       </div>
     </DefaultLayout>
   );
