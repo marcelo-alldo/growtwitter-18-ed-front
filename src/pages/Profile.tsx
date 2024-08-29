@@ -2,14 +2,15 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ButtonReturn from '../components/ButtonReturn/ButtonReturn';
 import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
-import { doGet } from '../services/api';
-import { useParams } from 'react-router-dom';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import Avatar from '../components/Avatar';
 
 function Profile() {
-  const idUser = useParams()
+  const { idUser } = useParams();
   const [enableRender, setEnableRender] = useState<boolean>(false);
   const [tweetsUser, setTweetsUser] = useState<any>(undefined);
+
+  const navigate = useNavigate();
 
   const config = {
     navigation: true,
@@ -17,18 +18,10 @@ function Profile() {
   };
 
   useEffect(() => {
-    const tokenFalso = '48d3b35b-12d2-43a6-a76d-5ea9335e38b8'; // token do usuario admin@hotmail.com
-    async function getTweets() {
-      const response = await doGet(`/tweet/${idUser}`, `${tokenFalso}`); // Adicionar token que vem do UserContext.token
-      console.log(response)
-      if (response.success) {
-        console.log(response.data);
-        setTweetsUser(response.data);
-        setEnableRender(true);
-        return;
-      }
+    const userLogged = localStorage.getItem('userLogged');
+    if (!userLogged) {
+      navigate('/login');
     }
-    getTweets();
   }, []);
 
   return (
@@ -100,17 +93,7 @@ function Profile() {
               alignItems: 'start',
             }}
           >
-            <img
-              src=""
-              alt=""
-              style={{
-                backgroundColor: '#be0a0a',
-                width: '80px',
-                height: '80px',
-                borderRadius: '50%',
-                border: '3px solid gray',
-              }}
-            />
+            <Avatar border={false} url="123" width={false} />
             <p style={{ margin: '0px', fontWeight: '500' }}>Daphne Dog</p>
             <p style={{ margin: '0px', fontWeight: '500' }}>@perfil</p>
           </div>
