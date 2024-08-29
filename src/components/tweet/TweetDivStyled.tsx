@@ -8,7 +8,6 @@ const TweetDivStyled = styled.div`
   margin: 0;
   align-items: center;
   gap: 1rem;
-  padding: 8px;
   a {
     gap: 5px;
     display: flex;
