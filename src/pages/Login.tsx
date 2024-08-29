@@ -4,19 +4,31 @@ import LoginButtonDefault from '../components/login/LoginButtonDefault';
 import H2Styled from '../components/login/H2Styled';
 import LabelStyled from '../components/login/LabelStyled';
 import { useNavigate } from 'react-router-dom';
+import { doPost } from '../services/api';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
-  function handleLogin() {
+  async function handleLogin() {
     if (!email || !password) {
       alert('Favor preencher os campos.');
     }
 
-    if (email && password) {
-      navigate('/home');
+    const response = await doPost('/auth', { email, password }, '');
+
+    console.log(response.data);
+
+    const dataLogin = {
+      email,
+      password,
+    };
+
+    if (response.success) {
+      console.log(response);
+      localStorage.setItem('userLogged', JSON.stringify(dataLogin));
+      navigate('/');
     }
   }
 
@@ -50,10 +62,10 @@ function Login() {
           }}
         >
           <H2Styled>Growtwitter</H2Styled>
-          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.2rem' }}>
+          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.5rem' }}>
             Trabalho final do bloco intermediário
           </small>
-          <p style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.5rem' }}>
+          <p style={{ paddingLeft: '10px', paddingRight: '10px', paddingTop: '20px', fontSize: '1.5rem' }}>
             O Growtwitter é a plataforma definitiva para todos os apaixonados por redes sociais que buscam uma
             experiência familiar e poderosa, semelhante ao Twitter, mas com um toque único. Seja parte dessa comunidade
             que valoriza a liberdade de expressão, a conexão com pessoas de todo o mundo e a disseminação de ideias.
