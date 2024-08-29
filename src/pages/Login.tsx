@@ -84,7 +84,7 @@ function Login() {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <LabelStyled htmlFor="user">Email</LabelStyled>
             <LoginInputStyled type="text" value={email} onChange={ev => setEmail(ev.target.value)} />
-            <LabelStyled htmlFor="password">Password</LabelStyled>
+            <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
           <LoginButtonDefault label="Entrar" action={handleLogin} />
