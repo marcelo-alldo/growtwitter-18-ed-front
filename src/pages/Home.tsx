@@ -6,7 +6,7 @@ function Home() {
     <>
       <DefaultLayout>
         <h1>Página inicial</h1>
-        <Tweet />
+        <Tweet user={true} />
       </DefaultLayout>
     </>
   );

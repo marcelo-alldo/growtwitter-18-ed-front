@@ -6,12 +6,17 @@ import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
 import { useEffect, useState } from 'react';
 
-function Tweet() {
+interface TweetProps {
+  user: boolean;
+}
+
+function Tweet({ user }: TweetProps) {
   const [tweets, setTweets] = useState<[]>([]);
   async function getTweets() {
-    const response = await doGet('/tweet', 'ec87dfea-2004-4eb9-99d7-86cd338114bf');
-    console.log(response);
-    console.log(tweets);
+    const userLogged = JSON.parse(localStorage.getItem('userLogged') || '');
+    console.log(`/tweet/${user ? userLogged?.id : ''}`, `${userLogged?.token}`);
+
+    const response = await doGet(`/tweet/${user ? userLogged?.id : ''}`, `${userLogged?.token}`);
 
     setTweets(response.data);
   }
