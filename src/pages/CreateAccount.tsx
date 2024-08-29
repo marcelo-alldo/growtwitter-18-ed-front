@@ -4,7 +4,7 @@ import LabelStyled from '../components/login/LabelStyled';
 import LoginInputStyled from '../components/login/LoginInputStyled';
 import { useNavigate } from 'react-router-dom';
 import { doPost } from '../services/api';
-import ButtonDefault from '../components/botao/ButtonDefault';
+import ButtonDefault from '../components/button/ButtonDefault';
 
 function CreateAccount() {
   const [email, setEmail] = useState<string>('');

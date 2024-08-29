@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginInputStyled from '../components/login/LoginInputStyled';
-import ButtonDefault from '../components/botao/ButtonDefault';
+import ButtonDefault from '../components/button/ButtonDefault';
 import H2Styled from '../components/login/H2Styled';
 import LabelStyled from '../components/login/LabelStyled';
 import { useNavigate } from 'react-router-dom';
