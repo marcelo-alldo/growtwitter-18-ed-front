@@ -3,6 +3,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Error404 from '../pages/Error404';
 import CreateAccount from '../pages/CreateAccount';
+import Explore from '../pages/Explore';
 
 const router = createBrowserRouter([
   {
@@ -10,14 +11,23 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error404 />,
   },
-  // {
-  //   path: '/perfil',
-  //   element: <Perfil />,
-  //   errorElement: <Error404 />,
-  // },
+
+//   {
+//     path: '/perfil',
+//     element: <Perfil />,
+//     errorElement: <Error404 />,
+//   },
+// =======
+
+
   {
     path: '/',
     element: <Home />,
+  },
+  {
+    path: '/explore',
+    element: <Explore />,
+    errorElement: <Error404 />,
   },
   {
     path: '/create-account',
