@@ -3,13 +3,12 @@ import ButtonReturn from '../components/ButtonReturn/ButtonReturn';
 import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
 import { doGet } from '../services/api';
+import { useParams } from 'react-router-dom';
 
-// interface ProfileProps{
-//   id: string
-// }
 
 function Profile() {
-  const [reRenderComponent, setReRenderComponent] = useState<boolean>(false);
+  const idUser = useParams()
+  const [enableRender, setEnableRender] = useState<boolean>(false);
   const [tweetsUser, setTweetsUser] = useState<any>(undefined);
 
   const config = {
@@ -17,32 +16,28 @@ function Profile() {
     footer: true,
   };
 
-  function ReRender() {
-    setReRenderComponent(!reRenderComponent);
-  }
-
   useEffect(() => {
-    const idUsuario = '795ff54c-7e20-472e-a26c-8ed2700e6bd9';
-    const tokenFalso = '87f85a3d-850e-4a41-9122-c4954edd4631'; // token do usuario admin@hotmail.com
-    async function getTweets(idUsuario: string) {
-      const response = await doGet(`/tweet/${idUsuario}`, `${tokenFalso}`); // Adicionar token que vem do UserContext.token
+    const tokenFalso = '2240d80b-b365-4260-8afc-29d6a0200afc'; // token do usuario admin@hotmail.com
+    async function getTweets() {
+      const response = await doGet(`/tweet/${idUser}`, `${tokenFalso}`); // Adicionar token que vem do UserContext.token
       if (response.success) {
+        console.log(response.data);
         setTweetsUser(response.data);
+        setEnableRender(true);
         return;
       }
     }
-    getTweets(idUsuario);
-  });
+    getTweets();
+  }, []);
 
   return (
     <DefaultLayout config={config}>
       <div
         style={{
-          width: '60vw',
+          width: '100%',
           height: '100vh',
           backgroundColor: '#fff',
           color: 'black',
-          border: '0.5px solid #DCDCDC',
         }}
       >
         <div
@@ -119,14 +114,15 @@ function Profile() {
             <p style={{ margin: '0px', fontWeight: '500' }}>@perfil</p>
           </div>
         </div>
-        <div style={{ width: '100%', height: '70%' }}>
-          {tweetsUser.map((item: any) => (
-            <div>
-              {item.userId}
-              {item.content}
-              {item.created_at}
-            </div>
-          ))}
+        <div style={{ width: '100%', height: '70%', display: 'flex', flexDirection: 'column' }}>
+          {enableRender &&
+            tweetsUser.map((item: any) => (
+              <div>
+                {item.userId}
+                {item.content}
+                {item.created_at}
+              </div>
+            ))}
         </div>
       </div>
     </DefaultLayout>

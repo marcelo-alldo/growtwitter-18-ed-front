@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     errorElement: <Error404/>
   },
   {
-    path: "/profile",
+    path: "/profile/:idUser",
     element: <Profile />,
   },
   {
