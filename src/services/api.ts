@@ -40,4 +40,4 @@ async function doGet(url: string, token: string) {
   }
 }
 
-export default { doPost, doGet };
+export { doPost, doGet };

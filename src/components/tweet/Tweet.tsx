@@ -1,29 +1,35 @@
 import TweetStyled from './TweetStyled';
-import doGet from '../../services/api';
+import { doGet } from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
+import { useEffect, useState } from 'react';
 
 function Tweet() {
+  const [tweets, setTweets] = useState<[]>([]);
   async function getTweets() {
-    // const response = await doGet('/tweets');
+    const response = await doGet('/tweet', 'ec87dfea-2004-4eb9-99d7-86cd338114bf');
+    console.log(response);
+    console.log(tweets);
+
+    setTweets(response.data);
   }
-  const tweet = [
-    { id: '1', name: 'dwadaw', username: 'aaaa', content: 'aaaaaaaaa', likes: 2 },
-    { id: '2', name: 'dwadwadaw', username: 'aaaa', content: 'bbbbbbb', likes: 5 },
-  ];
+  useEffect(() => {
+    getTweets();
+  }, []);
+
   return (
     <>
       <TweetStyled>
-        {tweet.map(item => {
+        {tweets.map(item => {
           return (
-            <TweetDivStyled>
-              <Avatar border={true} width={true} src={item.id} />
+            <TweetDivStyled key={item.id}>
+              <Avatar border={true} width={true} src={item.id[0]} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
-                  <b>{item.name}</b>
-                  <p>@{item.username} • 3h</p>
+                  <b>{item.user.name}</b>
+                  <p>@{item.user.username} • 3h</p>
                 </div>
                 <p>{item.content}</p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
@@ -33,7 +39,7 @@ function Tweet() {
                   </a>
                   <a>
                     <HeartTweet enable={false} />
-                    <p>{item.likes}</p>
+                    <p>{item._count.likes}</p>
                   </a>
                 </div>
               </div>
