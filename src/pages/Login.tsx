@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginInputStyled from '../components/login/LoginInputStyled';
-import LoginButtonDefault from '../components/login/LoginButtonDefault';
+import ButtonDefault from '../components/botao/ButtonDefault';
 import H2Styled from '../components/login/H2Styled';
 import LabelStyled from '../components/login/LabelStyled';
 import { useNavigate } from 'react-router-dom';
@@ -87,7 +87,7 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <LoginButtonDefault label="Entrar" action={handleLogin} />
+          <ButtonDefault label="Entrar" action={handleLogin} />
         </div>
       </div>
     </div>
