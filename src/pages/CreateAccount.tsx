@@ -19,7 +19,6 @@ function CreateAccount() {
     }
 
     const response = await doPost('/users', { email, password, name, username }, '');
-    console.log(response);
 
     if (response.success) {
       navigate('/login');
