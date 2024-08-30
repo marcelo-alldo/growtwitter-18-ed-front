@@ -6,6 +6,7 @@ import FooterStyled from '../../components/FooterStyled';
 import MenuNavigation from '../../components/MenuNavigation/MenuNavigation';
 import CardAssunto from '../../components/CardAssuntos/CardAssunto';
 
+
 interface DefaultLayoutProps {
   children: ReactNode;
   config?: {

@@ -1,4 +1,4 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ButtonReturn from '../components/ButtonReturn/ButtonReturn';
 import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
@@ -59,9 +59,9 @@ function Profile() {
                 alignItems: 'center',
               }}
             >
-              <ButtonReturn>
+              {/* <ButtonReturn>
                 <ArrowBackIcon htmlColor="#000000" />
-              </ButtonReturn>
+              </ButtonReturn> */}
             </div>
             <div
               style={{

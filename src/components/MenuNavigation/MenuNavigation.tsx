@@ -6,6 +6,9 @@ import ButtonDefault from '../button/ButtonDefault';
 import Modal from '../modal/Modal';
 import { useState } from 'react';
 import { doPost } from '../../services/api';
+import LogoGrow from '../../../public/logo_growtweet.svg'
+import "../../index.css"
+
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -34,7 +37,7 @@ function MenuNavigation() {
     <div className="container">
       <div className="menu">
         <div>
-          <h1>Logo</h1>
+        <img className="logoGrow" src={LogoGrow} alt="logo da growtweet" />
         </div>
         <div>
           <nav>
