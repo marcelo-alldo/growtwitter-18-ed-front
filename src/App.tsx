@@ -7,7 +7,7 @@ function App() {
     <>
       <DefaultTheme>
         <AppRoutes />
-        <GlobalStyled />
+        {/* <GlobalStyled /> */}
       </DefaultTheme>
     </>
   );

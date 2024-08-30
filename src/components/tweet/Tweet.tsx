@@ -1,5 +1,5 @@
 import TweetStyled from './TweetStyled';
-import { doGet } from '../../services/api';
+import { doDel, doGet, doPost } from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
@@ -12,14 +12,27 @@ interface TweetProps {
 
 function Tweet({ user }: TweetProps) {
   const [tweets, setTweets] = useState<[]>([]);
-  async function getTweets() {
-    const userLogged = JSON.parse(localStorage.getItem('userLogged') || '');
-    console.log(`/tweet/${user ? userLogged?.id : ''}`, `${userLogged?.token}`);
 
-    const response = await doGet(`/tweet/${user ? userLogged?.id : ''}`, `${userLogged?.token}`);
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '');
+
+  async function like(tweet: any) {
+    const userLike = tweet.likes.find(like => like.userId === userLogged.id);
+
+    if (userLike) {
+      await doDel(`/like/${userLike.id}`, userLogged.token);
+    } else {
+      await doPost(`/like`, { tweetId: tweet.id, userId: userLogged.id }, userLogged.token);
+    }
+
+    getTweets();
+  }
+
+  async function getTweets() {
+    const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
 
     setTweets(response.data);
   }
+
   useEffect(() => {
     getTweets();
   }, []);
@@ -30,7 +43,7 @@ function Tweet({ user }: TweetProps) {
         {tweets.map(item => {
           return (
             <TweetDivStyled key={item.id}>
-              <Avatar border={true} width={true} src={item.id[0]} />
+              <Avatar border={true} width={true} src={item.userId.replace(/[^0-9\.]+/g, '')} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <b>{item.user.name}</b>
@@ -42,9 +55,9 @@ function Tweet({ user }: TweetProps) {
                     <img src={commentTweet} alt="comment-tweet" />
                     <p>0</p>
                   </a>
-                  <a>
-                    <HeartTweet enable={false} />
-                    <p>{item._count.likes}</p>
+                  <a onClick={() => like(item)}>
+                    <HeartTweet enable={item.likes.find(like => like.userId === userLogged.id) ? true : false} />
+                    <p>{item.likes.length}</p>
                   </a>
                 </div>
               </div>
