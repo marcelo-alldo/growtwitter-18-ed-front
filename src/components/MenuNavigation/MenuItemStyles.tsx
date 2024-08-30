@@ -5,6 +5,11 @@ const MenuItemStyles = styled.div `
     display: flex;
     margin-bottom: 10px;
     justify-content: start;
+
+    .logoGrow{
+     width: 50px;
+
+    }
     .icon-Menu{
         margin-right: 7px;
     }
@@ -13,7 +18,7 @@ const MenuItemStyles = styled.div `
         font-size: 0.9em;
         color: #333;
         font-family:Verdana, Geneva, Tahoma, sans-serif;
-    }
+    } 
 
 `
 export default MenuItemStyles

@@ -5,6 +5,7 @@ const ButtonDefaultStyled = styled.button`
   height: 39px;
   border-radius: 40px;
   border: none;
+  margin-top: 12px;
 
   background-color: ${props => props.theme.colors.tertiary};
   color: ${props => props.theme.colors.primary};

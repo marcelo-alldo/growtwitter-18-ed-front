@@ -1,5 +1,6 @@
 import DefaultTheme from './config/theme/DefaultTheme';
 import AppRoutes from './routes/AppRoutes';
+import GlobalStyled from './config/GlobalStyled';
 import './App.css';
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
     <>
       <DefaultTheme>
         <AppRoutes />
-        {/* <GlobalStyled /> */}
+        <GlobalStyled />
       </DefaultTheme>
     </>
   );
