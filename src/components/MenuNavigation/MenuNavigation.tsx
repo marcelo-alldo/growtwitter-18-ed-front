@@ -15,9 +15,11 @@ function MenuNavigation() {
   }
   async function sendTweet(value: string) {
     const getAuth = JSON.stringify(localStorage.getItem('userLogged'));
+    const findToken = JSON.parse(getAuth);
+    const token = findToken.token;
 
     try {
-      const response = await doPost('/tweet', value, getAuth);
+      const response = await doPost('/tweet', value, token);
       if (response.success) {
         alert(response.msg);
         setValue('');
@@ -37,7 +39,7 @@ function MenuNavigation() {
         <div>
           <nav>
             <MenuItem icon={iconPageInitial} label="Página Inicial" route="/" />
-            <MenuItem icon={iconPageExplorer} label="Explorar" route="/" />
+            <MenuItem icon={iconPageExplorer} label="Explorar" route="/explore" />
             <MenuItem icon={iconPageProfile} label="Perfil" route="/" />
           </nav>
         </div>
@@ -45,7 +47,7 @@ function MenuNavigation() {
           {show ? (
             <Modal
               actionCancel={showModal}
-              actionConfirm={sendTweet(value)}
+              actionConfirm={()=>sendTweet(value)}
               setValue={e => setValue(e.target.value)}
               value={value}
             />
