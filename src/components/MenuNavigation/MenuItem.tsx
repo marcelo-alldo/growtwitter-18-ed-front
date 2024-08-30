@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import MenuItemStyles from './MenuItemStyles';
 
+
 interface MenuItemProps {
   icon: string;
   label: string;
