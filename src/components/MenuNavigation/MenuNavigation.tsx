@@ -15,10 +15,10 @@ import { useNavigate } from 'react-router-dom';
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
-  const [user, setUser] = useState<[]>([]);
+  const [user, setUser] = useState<any>([]);
   const navigate = useNavigate();
-
   const userLocal = JSON.parse(localStorage.getItem('userLogged') || '');
+
   function showModal() {
     setShow(!show);
   }
