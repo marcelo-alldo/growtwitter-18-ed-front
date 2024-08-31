@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const TweetDivStyled = styled.div`
-  width: 100%;
+  width: 50vw;
   height: auto;
-  border: 1px solid #e4e4e4;
+  border-top: 1px solid #b0b0b0;
+  border-bottom: 1px solid #b0b0b0;
   display: flex;
   margin: 0;
   align-items: center;
@@ -18,11 +19,6 @@ const TweetDivStyled = styled.div`
     &:hover {
       cursor: pointer;
     }
-  }
-  .user-image {
-    border-radius: 10rem;
-    width: 3rem;
-    align-self: flex-start;
   }
   p {
     margin: 0;

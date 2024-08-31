@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const TweetStyled = styled.section`
-  width: 100%;
-  height: 100%;
+  width: 50vw;
+  height: auto;
   display: flex;
   flex-direction: column;
 `;
