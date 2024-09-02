@@ -6,14 +6,14 @@ import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
 import { useEffect, useState } from 'react';
 
-interface TweetProps {
+interface TweetsProps {
   user: boolean;
 }
 
-function Tweet({ user }: TweetProps) {
+function Tweets({ user }: TweetsProps) {
   const [tweets, setTweets] = useState<[]>([]);
 
-  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '');
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
   async function like(tweet: any) {
     const userLike = tweet.likes.find(like => like.userId === userLogged.id);
@@ -28,13 +28,19 @@ function Tweet({ user }: TweetProps) {
   }
 
   async function getTweets() {
+    console.log('INCIANDO O GET');
     const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
-
-    setTweets(response.data);
+    console.log('DEPOIS DO O GET');
+    console.log(response);
+    if (response.success) {
+      setTweets(response.data);
+    }
   }
 
   useEffect(() => {
-    getTweets();
+    if (userLogged.token) {
+      getTweets();
+    }
   }, []);
 
   return (
@@ -68,4 +74,4 @@ function Tweet({ user }: TweetProps) {
     </>
   );
 }
-export default Tweet;
+export default Tweets;
