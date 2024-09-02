@@ -4,11 +4,14 @@ import DefaultLayout from '../config/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Avatar from '../components/Avatar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Tweet from '../components/tweet/Tweet';
 
 function Profile() {
-  const { idUser } = useParams();
-  const [enableRender, setEnableRender] = useState<boolean>(false);
-  const [tweetsUser, setTweetsUser] = useState<any>(undefined);
+  const { idUser } = useParams<{ idUser: string }>();
+  const userId = idUser ?? 'notUndefined'
+  // const [enableRender, setEnableRender] = useState<boolean>(false);
+  // const [tweetsUser, setTweetsUser] = useState<any>(undefined);
 
   const navigate = useNavigate();
 
@@ -18,6 +21,7 @@ function Profile() {
   };
 
   useEffect(() => {
+    console.log(idUser)
     const userLogged = localStorage.getItem('userLogged');
     if (!userLogged) {
       navigate('/login');
@@ -59,9 +63,9 @@ function Profile() {
                 alignItems: 'center',
               }}
             >
-              {/* <ButtonReturn>
+              <ButtonReturn>
                 <ArrowBackIcon htmlColor="#000000" />
-              </ButtonReturn> */}
+              </ButtonReturn>
             </div>
             <div
               style={{
@@ -93,20 +97,13 @@ function Profile() {
               alignItems: 'start',
             }}
           >
-            <Avatar border={false} url="123" width={false} />
+            <Avatar border={false} src={userId} width={false} />
             <p style={{ margin: '0px', fontWeight: '500' }}>Daphne Dog</p>
             <p style={{ margin: '0px', fontWeight: '500' }}>@perfil</p>
           </div>
         </div>
         <div style={{ width: '100%', height: '70%', display: 'flex', flexDirection: 'column' }}>
-          {enableRender &&
-            tweetsUser.map((item: any) => (
-              <div>
-                {item.userId}
-                {item.content}
-                {item.created_at}
-              </div>
-            ))}
+            <Tweet user={true} />
         </div>
       </div>
     </DefaultLayout>
