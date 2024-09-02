@@ -6,7 +6,6 @@ import FooterStyled from '../../components/FooterStyled';
 import MenuNavigation from '../../components/MenuNavigation/MenuNavigation';
 import CardAssunto from '../../components/CardAssuntos/CardAssunto';
 
-
 interface DefaultLayoutProps {
   children: ReactNode;
   config?: {
@@ -15,16 +14,16 @@ interface DefaultLayoutProps {
   };
 }
 
-function DefaultLayout({children}: DefaultLayoutProps) {
+function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <DefaultLayoutStyled>
-        <HeaderStyled>
-          <MenuNavigation />
-        </HeaderStyled>
-        <MainStyled >{children}</MainStyled>
-        <FooterStyled>
-          <CardAssunto />
-        </FooterStyled>
+      <HeaderStyled>
+        <MenuNavigation />
+      </HeaderStyled>
+      <MainStyled>{children}</MainStyled>
+      <FooterStyled>
+        <CardAssunto />
+      </FooterStyled>
     </DefaultLayoutStyled>
   );
 }

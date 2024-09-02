@@ -17,7 +17,7 @@ function MenuNavigation() {
   const [value, setValue] = useState<string>('');
   const [user, setUser] = useState<any>([]);
   const navigate = useNavigate();
-  const userLocal = JSON.parse(localStorage.getItem('userLogged') || '');
+  const userLocal = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
   function showModal() {
     setShow(!show);
@@ -48,7 +48,9 @@ function MenuNavigation() {
   }
 
   useEffect(() => {
-    getUser();
+    if (userLocal.token) {
+      getUser();
+    }
   }, []);
 
   return (
