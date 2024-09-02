@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const WhiteCardStyled = styled.div`
   width: 45%;
-  height: 100%;
+  height: 42vh;
   background-color: #ffffff;
   color: #070707;
   display: flex;

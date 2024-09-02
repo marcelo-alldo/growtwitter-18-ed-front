@@ -6,6 +6,7 @@ const LayoutStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f2f2f2;
 `;
 
 export default LayoutStyled;
