@@ -21,9 +21,11 @@ const ProfileStyled = styled.div`
   }
   p {
     font-weight: 700;
+    line-height: 10px;
   }
   small {
-    font-weight: 300;
+    font-weight: 400;
+    color: #7a7a7a;
   }
 `;
 

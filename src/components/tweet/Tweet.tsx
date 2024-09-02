@@ -11,7 +11,7 @@ interface TweetProps {
 }
 
 function Tweet({ user }: TweetProps) {
-  const [tweets, setTweets] = useState<any>([]);
+  const [tweets, setTweets] = useState<[]>([]);
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '');
 
