@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const LabelStyled = styled.label`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: grey;
   align-self: flex-start;
 `;

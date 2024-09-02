@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import LoginInputStyled from '../components/login/LoginInputStyled';
+import LoginInputStyled from '../components/login-and-create-account/LoginInputStyled';
 import ButtonDefault from '../components/button/ButtonDefault';
-import H2Styled from '../components/login/H2Styled';
-import LabelStyled from '../components/login/LabelStyled';
+import H2Styled from '../components/login-and-create-account/H2Styled';
+import LabelStyled from '../components/login-and-create-account/LabelStyled';
 import { useNavigate } from 'react-router-dom';
 import { doPost } from '../services/api';
+import BlueCardStyled from '../components/login-and-create-account/BlueCardStyled';
+import WhiteCardStyled from '../components/login-and-create-account/WhiteCardStyled';
+import PStyled from '../components/login-and-create-account/PStyled';
+import CenterCardStyled from '../components/login-and-create-account/CenterCardStyled';
+import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -18,7 +23,6 @@ function Login() {
 
     const response = await doPost('/auth', { email, password }, '');
 
-    console.log(response);
     if (response.success) {
       const dataLogin = {
         email,
@@ -26,62 +30,28 @@ function Login() {
         id: response.id,
       };
 
+      console.log(response);
+
       localStorage.setItem('userLogged', JSON.stringify(dataLogin));
       navigate('/');
     }
   }
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vw',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <div
-        style={{
-          height: '40vh',
-          width: '70vw',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: '55%',
-            height: '100%',
-            backgroundColor: '#1d9bf0',
-            borderTopLeftRadius: '10px',
-            borderBottomLeftRadius: '10px',
-            color: '#ffffff',
-          }}
-        >
+    <LayoutStyled>
+      <CenterCardStyled>
+        <BlueCardStyled>
           <H2Styled>Growtwitter</H2Styled>
-          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.5rem' }}>
+          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.0rem' }}>
             Trabalho final do bloco intermediário
           </small>
-          <p style={{ paddingLeft: '10px', paddingRight: '10px', paddingTop: '20px', fontSize: '1.5rem' }}>
+          <PStyled>
             O Growtwitter é a plataforma definitiva para todos os apaixonados por redes sociais que buscam uma
             experiência familiar e poderosa, semelhante ao Twitter, mas com um toque único. Seja parte dessa comunidade
             que valoriza a liberdade de expressão, a conexão com pessoas de todo o mundo e a disseminação de ideias.
-          </p>
-        </div>
-        <div
-          style={{
-            width: '45%',
-            height: '100%',
-            backgroundColor: '#ffffff',
-            color: '#070707',
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
+          </PStyled>
+        </BlueCardStyled>
+        <WhiteCardStyled>
           <H2Styled>Entrar no Growtwitter</H2Styled>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <LabelStyled htmlFor="user">Email</LabelStyled>
@@ -90,9 +60,9 @@ function Login() {
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
           <ButtonDefault label="Entrar" action={handleLogin} />
-        </div>
-      </div>
-    </div>
+        </WhiteCardStyled>
+      </CenterCardStyled>
+    </LayoutStyled>
   );
 }
 
