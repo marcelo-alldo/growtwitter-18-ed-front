@@ -4,25 +4,27 @@ import iconPageExplorer from '../../../public/icone_explorar_selecionado.svg';
 import iconPageProfile from '../../../public/icone_perfil.svg';
 import ButtonDefault from '../button/ButtonDefault';
 import Modal from '../modal/Modal';
-import { useState } from 'react';
-import { doPost } from '../../services/api';
-import LogoGrow from '../../../public/logo_growtweet.svg'
-import "../../index.css"
-
+import { useEffect, useState } from 'react';
+import { doGet, doPost } from '../../services/api';
+import LogoGrow from '../../../public/logo_growtweet.svg';
+import '../../index.css';
+import Avatar from '../Avatar';
+import ProfileStyled from './ProfileStyled';
+import { useNavigate } from 'react-router-dom';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
+  const [user, setUser] = useState<any>([]);
+  const navigate = useNavigate();
+  const userLocal = JSON.parse(localStorage.getItem('userLogged') || '');
+
   function showModal() {
     setShow(!show);
   }
-  async function sendTweet(value: string) {
-    const getAuth = JSON.stringify(localStorage.getItem('userLogged'));
-    const findToken = JSON.parse(getAuth);
-    const token = findToken.token;
-
+  async function sendTweet() {
     try {
-      const response = await doPost('/tweet', value, token);
+      const response = await doPost('/tweet', { content: value }, userLocal.token);
       if (response.success) {
         alert(response.msg);
         setValue('');
@@ -33,11 +35,27 @@ function MenuNavigation() {
     }
   }
 
+  async function getUser() {
+    const response = await doGet(`/users/${userLocal.id}`, userLocal.token);
+
+    response.data.id = response.data.id.replace(/[^0-9\.]+/g, '');
+    setUser(response.data);
+  }
+
+  function logout() {
+    localStorage.removeItem('userLogged');
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div className="container">
       <div className="menu">
         <div>
-        <img className="logoGrow" src={LogoGrow} alt="logo da growtweet" />
+          <img className="logoGrow" src={LogoGrow} alt="logo da growtweet" />
         </div>
         <div>
           <nav>
@@ -50,7 +68,7 @@ function MenuNavigation() {
           {show ? (
             <Modal
               actionCancel={showModal}
-              actionConfirm={()=>sendTweet(value)}
+              actionConfirm={sendTweet}
               setValue={e => setValue(e.target.value)}
               value={value}
             />
@@ -61,18 +79,19 @@ function MenuNavigation() {
         </div>
       </div>
 
-      <div className="perfil-sair">
-        <div className="perfil">
-          <div>Img perfil</div>
+      {/* RAFAEL E DOUGLAS */}
+      <ProfileStyled>
+        <div className="profile">
+          <Avatar border={true} width={true} key={user.name} src={user.id} />
           <div>
-            <h2>Nome</h2>
-            <p>Usuario</p>
+            <p>{user.name}</p>
+            <small>@{user.username}</small>
           </div>
         </div>
         <div>
-          <button>Sair</button>
+          <button onClick={logout}>Sair</button>
         </div>
-      </div>
+      </ProfileStyled>
     </div>
   );
 }
