@@ -1,6 +1,7 @@
 import ModalStyled from './ModalStyled';
 import ModalDivStyled from './ModalDivStyled';
 import iconClose from '../../../public/X.svg';
+import { useState } from 'react';
 
 interface ModalProps {
   value: string;
@@ -10,6 +11,12 @@ interface ModalProps {
 }
 
 function Modal({ actionCancel, actionConfirm, value, setValue }: ModalProps) {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  function loadingButton() {
+    setLoading(true);
+  }
+
   return (
     <>
       <ModalStyled>
@@ -20,7 +27,18 @@ function Modal({ actionCancel, actionConfirm, value, setValue }: ModalProps) {
 
           <textarea placeholder="Digite seu tweet aqui!" value={value} onChange={setValue} />
 
-          <button onClick={actionConfirm}>Tweetar</button>
+          {loading ? (
+            `Carregando...`
+          ) : (
+            <button
+              onClick={() => {
+                actionConfirm();
+                loadingButton();
+              }}
+            >
+              Tweetar
+            </button>
+          )}
         </ModalDivStyled>
       </ModalStyled>
     </>
