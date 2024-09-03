@@ -5,7 +5,6 @@ import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
 import { useEffect, useState } from 'react';
-import LoadingTweet from './LoadingTweet';
 
 interface TweetsProps {
   user: boolean;
@@ -18,20 +17,22 @@ function Tweets({ user }: TweetsProps) {
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
   async function like(tweet: any) {
-    setLoading(!loading);
     const userLike = tweet.likes.find(like => like.userId === userLogged.id);
+    setLoading(true);
 
     if (userLike) {
       await doDel(`/like/${userLike.id}`, userLogged.token);
     } else {
-      setLoading(!loading);
       await doPost(`/like`, { tweetId: tweet.id, userId: userLogged.id }, userLogged.token);
     }
+
+    setLoading(false);
     getTweets();
   }
 
   async function getTweets() {
     const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
+
     if (response.success) {
       setTweets(response.data);
     }
@@ -62,11 +63,10 @@ function Tweets({ user }: TweetsProps) {
                     <p>0</p>
                   </button>
                   <button onClick={() => like(item)} disabled={loading}>
-                    {loading ? (
-                      <LoadingTweet />
-                    ) : (
-                      <HeartTweet enable={item.likes.find(like => like.userId === userLogged.id) ? true : false} />
-                    )}
+                    <HeartTweet
+                      loading={loading}
+                      enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
+                    />
                     <p>{item.likes.length}</p>
                   </button>
                 </div>
