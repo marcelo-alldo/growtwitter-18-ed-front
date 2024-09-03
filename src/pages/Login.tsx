@@ -10,6 +10,7 @@ import WhiteCardStyled from '../components/login-and-create-account/WhiteCardSty
 import PStyled from '../components/login-and-create-account/PStyled';
 import CenterCardStyled from '../components/login-and-create-account/CenterCardStyled';
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
+import SmallStyled from '../components/login-and-create-account/SmallStyled';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -42,9 +43,7 @@ function Login() {
       <CenterCardStyled>
         <BlueCardStyled>
           <H2Styled>Growtwitter</H2Styled>
-          <small style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '1.0rem' }}>
-            Trabalho final do bloco intermediário
-          </small>
+          <SmallStyled>Trabalho final do bloco intermediário</SmallStyled>
           <PStyled>
             O Growtwitter é a plataforma definitiva para todos os apaixonados por redes sociais que buscam uma
             experiência familiar e poderosa, semelhante ao Twitter, mas com um toque único. Seja parte dessa comunidade
@@ -59,8 +58,8 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <ButtonDefault label="Entrar" action={handleLogin} />
-          <a href='/create-account'>Criar conta?</a>
+          <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
+          <a href="/create-account">Criar conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
