@@ -1,5 +1,5 @@
 import TweetStyled from './TweetStyled';
-import { doDel, doGet, doPost } from '../../services/api';
+import { doGet } from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
