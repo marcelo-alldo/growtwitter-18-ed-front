@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { ButtonDefaultProps } from './ButtonDefault';
 
-const ButtonDefaultStyled = styled.button`
-  width: 210px;
+const ButtonDefaultStyled = styled.button<ButtonDefaultProps>`
+  width: ${props => (props.bigButton ? '64%' : '210px')};
   height: 39px;
-  border-radius: 40px;
+  border-radius: ${props => (props.lessRound ? '10px' : '40px')};
   border: none;
   margin-top: 12px;
 
