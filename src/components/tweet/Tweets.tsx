@@ -12,23 +12,8 @@ interface TweetsProps {
 
 function Tweets({ user }: TweetsProps) {
   const [tweets, setTweets] = useState<[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
-
-  async function like(tweet: any) {
-    const userLike = tweet.likes.find(like => like.userId === userLogged.id);
-    setLoading(true);
-
-    if (userLike) {
-      await doDel(`/like/${userLike.id}`, userLogged.token);
-    } else {
-      await doPost(`/like`, { tweetId: tweet.id, userId: userLogged.id }, userLogged.token);
-    }
-
-    setLoading(false);
-    getTweets();
-  }
 
   async function getTweets() {
     const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
@@ -62,13 +47,12 @@ function Tweets({ user }: TweetsProps) {
                     <img src={commentTweet} alt="comment-tweet" />
                     <p>0</p>
                   </button>
-                  <button onClick={() => like(item)} disabled={loading}>
-                    <HeartTweet
-                      loading={loading}
-                      enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
-                    />
-                    <p>{item.likes.length}</p>
-                  </button>
+                  <HeartTweet
+                    getTweets={getTweets}
+                    tweet={item}
+                    enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
+                    likesLength={item.likes.length}
+                  />
                 </div>
               </div>
             </TweetDivStyled>
