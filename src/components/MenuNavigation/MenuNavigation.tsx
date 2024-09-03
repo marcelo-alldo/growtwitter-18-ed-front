@@ -1,7 +1,13 @@
 import MenuItem from './MenuItem';
-import iconPageInitial from '../../../public/icone_pagina inicial_selecionado.svg';
-import iconPageExplorer from '../../../public/icone_explorar_selecionado.svg';
+
+import iconPageInitial from '../../../public/icone_pagina inicial.svg';
+import iconPageExplorer from '../../../public/icone_explorar.svg';
 import iconPageProfile from '../../../public/icone_perfil.svg';
+
+import iconPageInitialSelecionado from '../../../public/icone_pagina inicial_selecionado.svg';
+import iconPageExplorerSelecionado from '../../../public/icone_explorar_selecionado.svg';
+import iconPageProfileSelecionado from '../../../public/icone_perfil_selecionado.svg';
+
 import ButtonDefault from '../button/ButtonDefault';
 import Modal from '../modal/Modal';
 import { useEffect, useState } from 'react';
@@ -61,9 +67,9 @@ function MenuNavigation() {
         </div>
         <div>
           <nav>
-            <MenuItem icon={iconPageInitial} label="Página Inicial" route="/" />
-            <MenuItem icon={iconPageExplorer} label="Explorar" route="/explore" />
-            <MenuItem icon={iconPageProfile} label="Perfil" route="/" />
+            <MenuItem icon={iconPageInitial} iconActive={iconPageInitialSelecionado} label="Página Inicial" route="/" />
+            <MenuItem icon={iconPageExplorer} iconActive={iconPageExplorerSelecionado} label="Explorar" route="/explore" />
+            <MenuItem icon={iconPageProfile} iconActive={iconPageProfileSelecionado} label="Perfil" route="/Profile" />
           </nav>
         </div>
         <div>
