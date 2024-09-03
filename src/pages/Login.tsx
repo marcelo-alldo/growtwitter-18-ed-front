@@ -11,6 +11,7 @@ import PStyled from '../components/login-and-create-account/PStyled';
 import CenterCardStyled from '../components/login-and-create-account/CenterCardStyled';
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
+import Links from '../components/login-and-create-account/LinksCreatandLogin';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -66,7 +67,7 @@ function Login() {
           ) : (
             <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
           )}
-          <a href="/create-account">Criar conta?</a>
+          <Links href="create-account" text="Não possui conta? Crie agora mesmo!" />
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
