@@ -58,7 +58,6 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <ButtonDefault label="Entrar" action={handleLogin} />
           <a href="/create-account">Criar conta?</a>
           <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
         </WhiteCardStyled>
