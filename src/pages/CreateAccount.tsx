@@ -56,6 +56,7 @@ function CreateAccount() {
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
           <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+          <a href="/login">Já possui conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>

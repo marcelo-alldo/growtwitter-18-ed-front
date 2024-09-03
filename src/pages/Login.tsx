@@ -58,8 +58,8 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <a href="/create-account">Criar conta?</a>
           <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
+          <a href="/create-account">Criar conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
