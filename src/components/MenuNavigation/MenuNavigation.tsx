@@ -68,8 +68,13 @@ function MenuNavigation() {
         <div>
           <nav>
             <MenuItem icon={iconPageInitial} iconActive={iconPageInitialSelecionado} label="Página Inicial" route="/" />
-            <MenuItem icon={iconPageExplorer} iconActive={iconPageExplorerSelecionado} label="Explorar" route="/explore" />
-            <MenuItem icon={iconPageProfile} iconActive={iconPageProfileSelecionado} label="Perfil" route="/Profile" />
+            <MenuItem
+              icon={iconPageExplorer}
+              iconActive={iconPageExplorerSelecionado}
+              label="Explorar"
+              route="/explore"
+            />
+            <MenuItem icon={iconPageProfile} iconActive={iconPageProfileSelecionado} label="Perfil" route="/profile" />
           </nav>
         </div>
         <div>
@@ -90,7 +95,7 @@ function MenuNavigation() {
       {/* RAFAEL E DOUGLAS */}
       <ProfileStyled>
         <div className="profile">
-          <Avatar border={true} width={true} key={user.name} src={user.id} />
+          <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
           <div>
             <p>{user.name}</p>
             <small>@{user.username}</small>
