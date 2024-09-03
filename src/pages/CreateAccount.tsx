@@ -11,6 +11,7 @@ import PStyled from '../components/login-and-create-account/PStyled';
 import CenterCardStyled from '../components/login-and-create-account/CenterCardStyled';
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
+import Links from '../components/login-and-create-account/LinksCreatandLogin';
 
 function CreateAccount() {
   const [email, setEmail] = useState<string>('');
@@ -55,8 +56,11 @@ function CreateAccount() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
+
           <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
-          <a href="/login">Já possui conta?</a>
+          <Links href="login" text="Já tem conta? Faça o login!" />
+
+          <ButtonDefault label="Entrar" action={handleCreateAccount} />
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
