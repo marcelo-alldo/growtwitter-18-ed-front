@@ -84,7 +84,7 @@ function MenuNavigation() {
       {/* RAFAEL E DOUGLAS */}
       <ProfileStyled>
         <div className="profile">
-          <Avatar border={true} width={true} key={user.name} src={user.id} />
+          <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
           <div>
             <p>{user.name}</p>
             <small>@{user.username}</small>

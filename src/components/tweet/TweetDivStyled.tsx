@@ -9,13 +9,14 @@ const TweetDivStyled = styled.div`
   margin: 0;
   align-items: center;
   gap: 1rem;
-  a {
+  button {
     gap: 5px;
     display: flex;
-    padding: 5px;
-    display: flex;
     align-items: center;
+    background-color: transparent;
+    border: none;
     font-size: 14px;
+    padding: 5px;
     &:hover {
       cursor: pointer;
     }
