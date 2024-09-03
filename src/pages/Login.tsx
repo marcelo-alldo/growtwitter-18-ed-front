@@ -60,6 +60,7 @@ function Login() {
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
           <ButtonDefault label="Entrar" action={handleLogin} />
+          <a href='/create-account'>Criar conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
