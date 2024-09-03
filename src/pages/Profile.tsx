@@ -14,6 +14,7 @@ function Profile() {
   const [userName, setUserName] = useState<string>('');
   const [userUsername, setUserUsername] = useState<string>('');
   const [userId, setUserId] = useState<string>('');
+  const [userIdAvatar, setUserIdAvatar] = useState<string>('')
   const navigate = useNavigate();
 
   const config = {
@@ -41,6 +42,7 @@ function Profile() {
       return;
     }
     setUserId(userLogged.id);
+    setUserIdAvatar(userId.replace(/[^0-9\.]+/g, ''))
   }, [userLogged]);
 
   useEffect(() => {
@@ -123,7 +125,7 @@ function Profile() {
                 alignItems: 'start',
               }}
             >
-              <Avatar useBorder={true} src="admin2" useWidth={false} />
+              <Avatar useBorder={true} src={userIdAvatar} useWidth={false} />
               <p style={{ margin: '0px', fontWeight: '500' }}>{userName}</p>
               <p style={{ margin: '0px', fontWeight: '500' }}>@{userUsername}</p>
             </div>
