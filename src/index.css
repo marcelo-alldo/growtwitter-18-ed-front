@@ -1,4 +1,9 @@
-.logoGrow{
-    height: 25px;
-    margin: 15px
+.logoGrow {
+  height: 25px;
+  margin: 15px;
+}
+
+html,
+body {
+  overflow-x: hidden;
 }

@@ -77,7 +77,7 @@ function MenuNavigation() {
           ) : (
             ''
           )}
-          <ButtonDefault label="Tweetar" action={showModal} />
+          <ButtonDefault label="Tweetar" action={showModal} bigButton={false} lessRound={false} />
         </div>
       </div>
 
