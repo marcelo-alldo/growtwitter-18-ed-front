@@ -10,6 +10,7 @@ import WhiteCardStyled from '../components/login-and-create-account/WhiteCardSty
 import PStyled from '../components/login-and-create-account/PStyled';
 import CenterCardStyled from '../components/login-and-create-account/CenterCardStyled';
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
+import Links from '../components/login-and-create-account/LinksCreatandLogin';
 
 function CreateAccount() {
   const [email, setEmail] = useState<string>('');
@@ -57,6 +58,7 @@ function CreateAccount() {
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
           <ButtonDefault label="Entrar" action={handleCreateAccount} />
+          <Links href="login" text="Já tem conta? Faça o login!" />
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
