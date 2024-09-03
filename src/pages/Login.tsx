@@ -15,6 +15,7 @@ import SmallStyled from '../components/login-and-create-account/SmallStyled';
 function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   async function handleLogin() {
@@ -22,8 +23,10 @@ function Login() {
       alert('Favor preencher os campos.');
     }
 
+    setLoading(true);
     const response = await doPost('/auth', { email, password }, '');
 
+    setLoading(false);
     if (response.success) {
       const dataLogin = {
         email,
@@ -58,7 +61,11 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
+          {loading ? (
+            `Carregando...`
+          ) : (
+            <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
+          )}
           <a href="/create-account">Criar conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>

@@ -18,14 +18,17 @@ function CreateAccount() {
   const [name, setName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function handleCreateAccount() {
     if (!email || !password || !name || !username) {
       alert('Favor preencher os campos.');
     }
 
+    setLoading(true);
     const response = await doPost('/users', { email, password, name, username }, '');
 
+    setLoading(false);
     if (response.success) {
       navigate('/login');
     }
@@ -55,7 +58,11 @@ function CreateAccount() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+          {loading ? (
+            `Carregando...`
+          ) : (
+            <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+          )}
           <a href="/login">Já possui conta?</a>
         </WhiteCardStyled>
       </CenterCardStyled>
