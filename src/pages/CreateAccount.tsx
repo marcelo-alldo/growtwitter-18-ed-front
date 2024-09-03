@@ -19,14 +19,17 @@ function CreateAccount() {
   const [name, setName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function handleCreateAccount() {
     if (!email || !password || !name || !username) {
       alert('Favor preencher os campos.');
     }
 
+    setLoading(true);
     const response = await doPost('/users', { email, password, name, username }, '');
 
+    setLoading(false);
     if (response.success) {
       navigate('/login');
     }

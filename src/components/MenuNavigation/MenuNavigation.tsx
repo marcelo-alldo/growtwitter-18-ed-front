@@ -24,13 +24,17 @@ function MenuNavigation() {
   const [user, setUser] = useState<any>([]);
   const navigate = useNavigate();
   const userLocal = JSON.parse(localStorage.getItem('userLogged') || '{}');
+  const [loading, setLoading] = useState<boolean>(false);
 
   function showModal() {
     setShow(!show);
   }
   async function sendTweet() {
     try {
+      setLoading(true);
       const response = await doPost('/tweet', { content: value }, userLocal.token);
+
+      setLoading(false);
       if (response.success) {
         alert(response.msg);
         setValue('');
@@ -88,7 +92,11 @@ function MenuNavigation() {
           ) : (
             ''
           )}
-          <ButtonDefault label="Tweetar" action={showModal} bigButton={false} lessRound={false} />
+          {loading ? (
+            `Carregando...`
+          ) : (
+            <ButtonDefault label="Tweetar" action={showModal} bigButton={false} lessRound={false} />
+          )}
         </div>
       </div>
 
@@ -101,9 +109,7 @@ function MenuNavigation() {
             <small>@{user.username}</small>
           </div>
         </div>
-        <div>
-          <button onClick={logout}>Sair</button>
-        </div>
+        <div>{loading ? `Carregando...` : <button onClick={logout}>Sair</button>}</div>
       </ProfileStyled>
     </div>
   );
