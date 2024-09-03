@@ -11,10 +11,11 @@ import { CircularProgress } from '@mui/material';
 
 function Profile() {
   const [loading, setLoading] = useState<boolean>(true);
+  const [tweetsNumber, setTweetsNumber] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userUsername, setUserUsername] = useState<string>('');
   const [userId, setUserId] = useState<string>('');
-  const [userIdAvatar, setUserIdAvatar] = useState<string>('')
+  const [userIdAvatar, setUserIdAvatar] = useState<string>('');
   const navigate = useNavigate();
 
   const config = {
@@ -26,14 +27,19 @@ function Profile() {
 
   async function getInfos() {
     const response = await doGet(`/users/${userId}`, `${userLogged.token}`);
-    console.log(response);
     if (response.success) {
       setUserName(response.data.name);
       setUserUsername(response.data.username);
-      setLoading(false)
-      return
+      setLoading(false);
+      return;
     }
+  }
 
+  async function getTweets() {
+    const response = await doGet(`/tweet/${userId}`, `${userLogged.token}`);
+    if (response.success) {
+      setTweetsNumber(response.data.length);
+    }
   }
 
   useEffect(() => {
@@ -42,19 +48,20 @@ function Profile() {
       return;
     }
     setUserId(userLogged.id);
-    setUserIdAvatar(userId.replace(/[^0-9\.]+/g, ''))
+    setUserIdAvatar(userId.replace(/[^0-9\.]+/g, ''));
+    getTweets();
   }, [userLogged]);
 
   useEffect(() => {
     if (userId) {
       getInfos();
     }
-  });
+  }, [userId]);
 
   return (
     <DefaultLayout config={config}>
       {loading ? (
-        <div style={{height: '100vh', width: '100%', display: 'grid', placeItems: 'center'}}>
+        <div style={{ height: '100vh', width: '100%', display: 'grid', placeItems: 'center' }}>
           <CircularProgress />
         </div>
       ) : (
@@ -114,7 +121,7 @@ function Profile() {
                     margin: '0px',
                   }}
                 >
-                  X tweets
+                  {tweetsNumber} Tweets
                 </p>
               </div>
             </div>
