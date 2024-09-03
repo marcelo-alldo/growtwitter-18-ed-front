@@ -58,7 +58,7 @@ function CreateAccount() {
           </div>
 
           <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
-          <Links href="login" text="Já tem conta? Faça o login!" />
+          <Links href="login" text="Já tem uma conta? Faça o login!" />
         </WhiteCardStyled>
       </CenterCardStyled>
     </LayoutStyled>
