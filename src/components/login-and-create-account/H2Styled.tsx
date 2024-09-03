@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const H2Styled = styled.h2`
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 20px;
