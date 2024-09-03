@@ -59,8 +59,11 @@ function CreateAccount() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-
-          <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+          {loading ? (
+            `Carregando...`
+          ) : (
+            <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+          )}
           <Links href="login" text="Já tem uma conta? Faça o login!" />
         </WhiteCardStyled>
       </CenterCardStyled>
