@@ -1,13 +1,10 @@
 import MenuItem from './MenuItem';
-
 import iconPageInitial from '../../../public/icone_pagina inicial.svg';
 import iconPageExplorer from '../../../public/icone_explorar.svg';
 import iconPageProfile from '../../../public/icone_perfil.svg';
-
 import iconPageInitialSelecionado from '../../../public/icone_pagina inicial_selecionado.svg';
 import iconPageExplorerSelecionado from '../../../public/icone_explorar_selecionado.svg';
 import iconPageProfileSelecionado from '../../../public/icone_perfil_selecionado.svg';
-
 import ButtonDefault from '../button/ButtonDefault';
 import Modal from '../modal/Modal';
 import { useEffect, useState } from 'react';
@@ -17,6 +14,7 @@ import '../../index.css';
 import Avatar from '../Avatar';
 import ProfileStyled from './ProfileStyled';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -32,9 +30,15 @@ function MenuNavigation() {
     try {
       const response = await doPost('/tweet', { content: value }, userLocal.token);
       if (response.success) {
-        alert(response.msg);
         setValue('');
         setShow(false);
+        toast.success('Tweet publicado com sucesso!!', {
+          position: 'top-center',
+        });
+      } else {
+        toast.error('Error ao publicar seu tweet', {
+          position: 'top-center',
+        });
       }
     } catch (error) {
       return error;
@@ -93,6 +97,7 @@ function MenuNavigation() {
       </div>
 
       {/* RAFAEL E DOUGLAS */}
+      <ToastContainer />
       <ProfileStyled>
         <div className="profile">
           <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
