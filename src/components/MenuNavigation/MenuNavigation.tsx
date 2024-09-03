@@ -15,6 +15,7 @@ import Avatar from '../Avatar';
 import ProfileStyled from './ProfileStyled';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -27,6 +28,7 @@ function MenuNavigation() {
   function showModal() {
     setShow(!show);
   }
+
   async function sendTweet() {
     try {
       setLoading(true);
@@ -66,7 +68,6 @@ function MenuNavigation() {
       getUser();
     }
   }, []);
-
   return (
     <div className="container">
       <div className="menu">
@@ -103,10 +104,9 @@ function MenuNavigation() {
           )}
         </div>
       </div>
-
       {/* RAFAEL E DOUGLAS */}
-      <ToastContainer />
       <ProfileStyled>
+        <ToastContainer />
         <div className="profile">
           <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
           <div>
