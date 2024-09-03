@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const LoginInputStyled = styled.input`
   width: 20vw;
-  height: 10px;
+  height: 30px;
   border-radius: 7px;
-  padding: 10px;
+  opacity: 25%;
 `;
 
 export default LoginInputStyled;
