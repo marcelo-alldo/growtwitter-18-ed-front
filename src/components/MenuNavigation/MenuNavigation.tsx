@@ -68,8 +68,13 @@ function MenuNavigation() {
         <div>
           <nav>
             <MenuItem icon={iconPageInitial} iconActive={iconPageInitialSelecionado} label="Página Inicial" route="/" />
-            <MenuItem icon={iconPageExplorer} iconActive={iconPageExplorerSelecionado} label="Explorar" route="/explore" />
-            <MenuItem icon={iconPageProfile} iconActive={iconPageProfileSelecionado} label="Perfil" route="/Profile" />
+            <MenuItem
+              icon={iconPageExplorer}
+              iconActive={iconPageExplorerSelecionado}
+              label="Explorar"
+              route="/explore"
+            />
+            <MenuItem icon={iconPageProfile} iconActive={iconPageProfileSelecionado} label="Perfil" route="/profile" />
           </nav>
         </div>
         <div>

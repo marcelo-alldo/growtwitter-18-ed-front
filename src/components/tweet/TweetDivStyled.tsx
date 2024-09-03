@@ -6,7 +6,6 @@ const TweetDivStyled = styled.div`
   border-top: 1px solid #b0b0b0;
   border-bottom: 1px solid #b0b0b0;
   display: flex;
-  margin: 0;
   align-items: center;
   gap: 1rem;
   button {
