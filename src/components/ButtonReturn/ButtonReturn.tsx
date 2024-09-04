@@ -1,15 +1,13 @@
-import { ReactNode } from "react";
-import ButtonReturnStyled from "./ButtonReturnStyled"
+import { ReactNode } from 'react';
+import ButtonReturnStyled from './ButtonReturnStyled';
 
-interface ButtonReturnProps{
-    onClick?: () => void;
-    children: ReactNode
+interface ButtonReturnProps {
+  onClick?: () => void;
+  children: ReactNode;
 }
 
-function ButtonReturn({children, onClick}:ButtonReturnProps){
-    return(
-        <ButtonReturnStyled onClick={onClick}>{children}</ButtonReturnStyled>
-    )
+function ButtonReturn({ children, onClick }: ButtonReturnProps) {
+  return <ButtonReturnStyled onClick={onClick}>{children}</ButtonReturnStyled>;
 }
 
-export default ButtonReturn
+export default ButtonReturn;
