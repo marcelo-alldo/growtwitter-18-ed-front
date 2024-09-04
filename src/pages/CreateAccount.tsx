@@ -43,6 +43,11 @@ function CreateAccount() {
       setTimeout(() => {
         navigate('/login');
       }, 3000);
+    } else {
+      toast.error('Usuário já existente. Cadastre outro email.', {
+        position: 'top-center',
+        autoClose: 2000,
+      });
     }
   }
 
