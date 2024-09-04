@@ -7,7 +7,7 @@ import iconPageExplorerSelecionado from '../../../public/icone_explorar_selecion
 import iconPageProfileSelecionado from '../../../public/icone_perfil_selecionado.svg';
 import ButtonDefault from '../button/ButtonDefault';
 import Modal from '../modal/Modal';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { doGet, doPost } from '../../services/api';
 import LogoGrow from '../../../public/logo_growtweet.svg';
 import '../../index.css';
@@ -15,6 +15,7 @@ import Avatar from '../Avatar';
 import ProfileStyled from './ProfileStyled';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { TweetContext } from '../../contexts/TweetsContext';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -23,6 +24,7 @@ function MenuNavigation() {
   const navigate = useNavigate();
   const userLocal = JSON.parse(localStorage.getItem('userLogged') || '{}');
   const [loading, setLoading] = useState<boolean>(false);
+  const tweetContext = useContext(TweetContext);
 
   function showModal() {
     setShow(!show);
@@ -40,6 +42,7 @@ function MenuNavigation() {
         toast.success('Tweet publicado com sucesso!!', {
           position: 'top-center',
         });
+        tweetContext?.setData({});
       } else {
         toast.error('Error ao publicar seu tweet', {
           position: 'top-center',
@@ -67,6 +70,7 @@ function MenuNavigation() {
       getUser();
     }
   }, []);
+
   return (
     <div className="container">
       <div className="menu">

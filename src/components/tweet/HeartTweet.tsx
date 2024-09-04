@@ -36,11 +36,6 @@ function HeartTweet({ enable, getTweets, tweet, likesLength }: HeartTweetProps) 
                 fill={enable ? 'red' : '#828282'}
               />
             </g>
-            <defs>
-              <clipPath id="clip0_83_2222">
-                <rect width="11" height="10" fill="white" />
-              </clipPath>
-            </defs>
           </svg>
         ) : (
           <svg xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 200 200">
