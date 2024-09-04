@@ -15,7 +15,6 @@ import Avatar from '../Avatar';
 import ProfileStyled from './ProfileStyled';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
