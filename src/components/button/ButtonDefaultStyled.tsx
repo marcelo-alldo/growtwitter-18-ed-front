@@ -11,6 +11,10 @@ const ButtonDefaultStyled = styled.button<ButtonDefaultProps>`
   background-color: ${props => props.theme.colors.tertiary};
   color: ${props => props.theme.colors.primary};
   font-size: 1.1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default ButtonDefaultStyled;
