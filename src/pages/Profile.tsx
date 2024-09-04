@@ -15,6 +15,7 @@ function Profile() {
   const [userName, setUserName] = useState<string>('');
   const [userUsername, setUserUsername] = useState<string>('');
   const [userId, setUserId] = useState<string>('');
+  const [token, setToken] = useState<string>('');
   const [userIdAvatar, setUserIdAvatar] = useState<string>('');
   const navigate = useNavigate();
 
@@ -23,40 +24,39 @@ function Profile() {
     footer: true,
   };
 
-  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
-
   async function getInfos() {
-    const response = await doGet(`/users/${userId}`, `${userLogged.token}`);
-    if (response.success) {
-      setUserName(response.data.name);
-      setUserUsername(response.data.username);
-      setLoading(false);
-      return;
-    }
-  }
+    setLoading(true);
+    const responseTweets = await doGet(`/tweet/${userId}`, `${token}`);
+    const responseUser = await doGet(`/users/${userId}`, `${token}`);
 
-  async function getTweets() {
-    const response = await doGet(`/tweet/${userId}`, `${userLogged.token}`);
-    if (response.success) {
-      setTweetsNumber(response.data.length);
+    if (responseTweets.success && responseUser.success) {
+      setTweetsNumber(responseTweets.data.length);
+      setUserName(responseUser.data.name);
+      setUserUsername(responseUser.data.username);
     }
+
+    setLoading(false);
+    return;
   }
 
   useEffect(() => {
-    if (!userLogged) {
+    if (userId && token) {
+      getInfos();
+    }
+  }, [userId, token]);
+
+  useEffect(() => {
+    const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
+
+    if (!userLogged.id) {
       navigate('/login');
       return;
     }
-    setUserId(userLogged.id);
-    setUserIdAvatar(userId.replace(/[^0-9\.]+/g, ''));
-    getTweets();
-  }, [userLogged]);
 
-  useEffect(() => {
-    if (userId) {
-      getInfos();
-    }
-  }, [userId]);
+    setUserId(userLogged.id);
+    setToken(userLogged.token);
+    setUserIdAvatar(userLogged.id.replace(/[^0-9\.]+/g, ''));
+  }, []);
 
   return (
     <DefaultLayout config={config}>
