@@ -12,6 +12,8 @@ import CenterCardStyled from '../components/login-and-create-account/CenterCardS
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
 import Links from '../components/login-and-create-account/LinksCreatandLogin';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 function CreateAccount() {
   const [email, setEmail] = useState<string>('');
@@ -23,7 +25,10 @@ function CreateAccount() {
 
   async function handleCreateAccount() {
     if (!email || !password || !name || !username) {
-      alert('Favor preencher os campos.');
+      toast.error('Favor preencher os campos vazios.', {
+        position: 'top-center',
+        autoClose: 3000,
+      });
     }
 
     setLoading(true);
@@ -31,6 +36,12 @@ function CreateAccount() {
 
     setLoading(false);
     if (response.success) {
+      setTimeout(() => {
+        toast.success('Conta criada com sucesso!', {
+          position: 'top-center',
+          autoClose: 3000,
+        });
+      }, 3000);
       navigate('/login');
     }
   }
@@ -67,6 +78,7 @@ function CreateAccount() {
           <Links href="login" text="Já tem uma conta? Faça o login!" />
         </WhiteCardStyled>
       </CenterCardStyled>
+      <ToastContainer />
     </LayoutStyled>
   );
 }
