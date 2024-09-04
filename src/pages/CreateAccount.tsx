@@ -26,7 +26,7 @@ function CreateAccount() {
     if (!email || !password || !name || !username) {
       toast.error('Favor preencher os campos vazios.', {
         position: 'top-center',
-        autoClose: 3000,
+        autoClose: 2000,
       });
     }
 
@@ -35,13 +35,14 @@ function CreateAccount() {
 
     setLoading(false);
     if (response.success) {
+      toast.success('Conta criada com sucesso!', {
+        position: 'top-center',
+        autoClose: 2000,
+      });
+
       setTimeout(() => {
-        toast.success('Conta criada com sucesso!', {
-          position: 'top-center',
-          autoClose: 3000,
-        });
+        navigate('/login');
       }, 3000);
-      navigate('/login');
     }
   }
 
