@@ -12,6 +12,8 @@ import CenterCardStyled from '../components/login-and-create-account/CenterCardS
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
 import Links from '../components/login-and-create-account/LinksCreatandLogin';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -21,7 +23,10 @@ function Login() {
 
   async function handleLogin() {
     if (!email || !password) {
-      alert('Favor preencher os campos.');
+      toast.error('Favor preencher os campos vazios.', {
+        position: 'top-center',
+        autoClose: 3000,
+      });
     }
 
     setLoading(true);
@@ -35,10 +40,21 @@ function Login() {
         id: response.id,
       };
 
-      console.log(response);
-
       localStorage.setItem('userLogged', JSON.stringify(dataLogin));
+
+      setTimeout(() => {
+        toast.success('Login efetuado com sucesso!', {
+          position: 'top-center',
+          autoClose: 3000,
+        });
+      }, 3000);
+
       navigate('/');
+    } else {
+      toast.error('Email e/ou senha incorretos.', {
+        position: 'top-center',
+        autoClose: 3000,
+      });
     }
   }
 
@@ -70,6 +86,7 @@ function Login() {
           <Links href="create-account" text="Não possui conta? Crie agora mesmo!" />
         </WhiteCardStyled>
       </CenterCardStyled>
+      <ToastContainer />
     </LayoutStyled>
   );
 }
