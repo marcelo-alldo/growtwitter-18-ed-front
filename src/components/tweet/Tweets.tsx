@@ -6,6 +6,8 @@ import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
 import { useContext, useEffect, useState } from 'react';
 import { TweetContext } from '../../contexts/TweetsContext';
+import { formatDistance } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 interface TweetsProps {
   user: boolean;
@@ -14,6 +16,8 @@ interface TweetsProps {
 function Tweets({ user }: TweetsProps) {
   const tweetContext = useContext(TweetContext);
   const [tweets, setTweets] = useState<[]>([]);
+  const date = new Date();
+  const timestamp = date.toISOString();
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
@@ -45,7 +49,9 @@ function Tweets({ user }: TweetsProps) {
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <b>{item.user.name}</b>
-                  <p>@{item.user.username} • 3h</p>
+                  <p>
+                    @{item.user.username} • {formatDistance(item.createdAt, timestamp, { locale: ptBR })}
+                  </p>
                 </div>
                 <p>{item.content}</p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
