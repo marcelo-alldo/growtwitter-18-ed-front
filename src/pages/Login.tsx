@@ -24,7 +24,7 @@ function Login() {
     if (!email || !password) {
       toast.error('Favor preencher os campos vazios.', {
         position: 'top-center',
-        autoClose: 3000,
+        autoClose: 2000,
       });
     }
 
@@ -41,18 +41,18 @@ function Login() {
 
       localStorage.setItem('userLogged', JSON.stringify(dataLogin));
 
-      setTimeout(() => {
-        toast.success('Login efetuado com sucesso!', {
-          position: 'top-center',
-          autoClose: 3000,
-        });
-      }, 3000);
+      toast.success('Login efetuado com sucesso!', {
+        position: 'top-center',
+        autoClose: 2000,
+      });
 
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     } else {
       toast.error('Email e/ou senha incorretos.', {
         position: 'top-center',
-        autoClose: 3000,
+        autoClose: 2000,
       });
     }
   }
