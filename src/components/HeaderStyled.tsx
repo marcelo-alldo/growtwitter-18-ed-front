@@ -11,7 +11,8 @@ const HeaderStyled = styled.header`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
+        margin: 0 40px;
 
         .perfil-sair {
             display: flex;
