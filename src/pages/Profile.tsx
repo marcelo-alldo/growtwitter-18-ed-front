@@ -69,7 +69,7 @@ function Profile() {
           style={{
             width: '100%',
             height: '100vh',
-            backgroundColor: '#fff',
+            backgroundColor: '#F2F2F2',
             color: 'black',
           }}
         >
