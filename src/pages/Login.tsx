@@ -13,7 +13,6 @@ import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
 import Links from '../components/login-and-create-account/LinksCreatandLogin';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState<string>('');

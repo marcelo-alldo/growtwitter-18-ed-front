@@ -44,7 +44,7 @@ function MenuNavigation() {
         });
         tweetContext?.setData({});
       } else {
-        toast.error('Error ao publicar seu tweet', {
+        toast.error('Erro ao publicar seu tweet', {
           position: 'top-center',
         });
       }

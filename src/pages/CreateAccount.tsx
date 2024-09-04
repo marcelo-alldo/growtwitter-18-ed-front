@@ -12,7 +12,6 @@ import CenterCardStyled from '../components/login-and-create-account/CenterCardS
 import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
 import Links from '../components/login-and-create-account/LinksCreatandLogin';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 
 function CreateAccount() {
