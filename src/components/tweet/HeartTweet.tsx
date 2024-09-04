@@ -22,7 +22,9 @@ function HeartTweet({ enable, getTweets, tweet, likesLength }: HeartTweetProps) 
       await doPost(`/like`, { tweetId: tweet.id, userId: userLogged.id }, userLogged.token);
     }
 
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
     getTweets();
   }
   return (
