@@ -98,7 +98,7 @@ function Profile() {
                   alignItems: 'center',
                 }}
               >
-                <ButtonReturn>
+                <ButtonReturn onClick={() => navigate('/')}>
                   <ArrowBackIcon htmlColor="#000000" />
                 </ButtonReturn>
               </div>
