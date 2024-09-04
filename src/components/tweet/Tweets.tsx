@@ -4,13 +4,15 @@ import commentTweet from '../../../public/icone_responder.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { TweetContext } from '../../contexts/TweetsContext';
 
 interface TweetsProps {
   user: boolean;
 }
 
 function Tweets({ user }: TweetsProps) {
+  const tweetContext = useContext(TweetContext);
   const [tweets, setTweets] = useState<[]>([]);
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
@@ -28,6 +30,10 @@ function Tweets({ user }: TweetsProps) {
       getTweets();
     }
   }, []);
+
+  useEffect(() => {
+    getTweets();
+  }, [tweetContext]);
 
   return (
     <>
