@@ -41,14 +41,7 @@ function Login() {
 
       localStorage.setItem('userLogged', JSON.stringify(dataLogin));
 
-      toast.success('Login efetuado com sucesso!', {
-        position: 'top-center',
-        autoClose: 2000,
-      });
-
-      setTimeout(() => {
-        navigate('/');
-      }, 3000);
+      navigate('/');
     } else {
       toast.error('Email e/ou senha incorretos.', {
         position: 'top-center',
