@@ -11,6 +11,7 @@ const WhiteCardStyled = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
+  flex-wrap: wrap;
 `;
 
 export default WhiteCardStyled;
