@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { TweetContext } from '../../contexts/TweetsContext';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import TweetType from '../../types/tweetType';
 
 interface TweetsProps {
   user: boolean;
@@ -15,7 +16,7 @@ interface TweetsProps {
 
 function Tweets({ user }: TweetsProps) {
   const tweetContext = useContext(TweetContext);
-  const [tweets, setTweets] = useState<[]>([]);
+  const [tweets, setTweets] = useState<TweetType[]>([]);
   const date = new Date();
   const timestamp = date.toISOString();
 
@@ -63,7 +64,7 @@ function Tweets({ user }: TweetsProps) {
                     getTweets={getTweets}
                     tweet={item}
                     enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
-                    likesLength={item.likes.length}
+                    likesLength={`${item.likes.length}`}
                   />
                 </div>
               </div>
