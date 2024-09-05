@@ -4,7 +4,7 @@ interface LinkProps {
 }
 
 function Links({ href, text }: LinkProps) {
-  return <a href={`http://localhost:5173/${href}`}>{text}</a>;
+  return <a href={`/${href}`}>{text}</a>;
 }
 
 export default Links;
