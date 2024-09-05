@@ -16,6 +16,7 @@ import ProfileStyled from './ProfileStyled';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { TweetContext } from '../../contexts/TweetsContext';
+import { CircularProgress } from '@mui/material';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -25,6 +26,7 @@ function MenuNavigation() {
   const userLocal = JSON.parse(localStorage.getItem('userLogged') || '{}');
   const [loading, setLoading] = useState<boolean>(false);
   const tweetContext = useContext(TweetContext);
+  const [showAvatar, setShowAvatar] = useState<boolean>(false);
 
   function showModal() {
     setShow(!show);
@@ -54,10 +56,15 @@ function MenuNavigation() {
   }
 
   async function getUser() {
+    setLoading(true);
     const response = await doGet(`/users/${userLocal.id}`, userLocal.token);
-
-    response.data.id = response.data.id.replace(/[^0-9\.]+/g, '');
-    setUser(response.data);
+    if (response.success) {
+      response.data.id = response.data.id.replace(/[^0-9\.]+/g, '');
+      setUser(response.data);
+      setShowAvatar(true);
+    }
+    setLoading(false);
+    return;
   }
 
   function logout() {
@@ -100,25 +107,27 @@ function MenuNavigation() {
           ) : (
             ''
           )}
-          {loading ? (
-            `Carregando...`
-          ) : (
-            <ButtonDefault label="Tweetar" action={showModal} bigButton={false} lessRound={false} />
-          )}
+          {loading ? '' : <ButtonDefault label="Tweetar" action={showModal} bigButton={false} lessRound={false} />}
         </div>
       </div>
       {/* RAFAEL E DOUGLAS */}
-      <ProfileStyled>
-        <ToastContainer />
-        <div className="profile">
-          <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
-          <div>
-            <p>{user.name}</p>
-            <small>@{user.username}</small>
+      {showAvatar ? (
+        <ProfileStyled>
+          <ToastContainer />
+          <div className="profile">
+            <Avatar useBorder={false} useWidth={true} key={user.name} src={user.id} />
+            <div>
+              <p>{user.name}</p>
+              <small>@{user.username}</small>
+            </div>
           </div>
+          <div>{loading ? '' : <button onClick={logout}>Sair</button>}</div>
+        </ProfileStyled>
+      ) : (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
+          <CircularProgress />
         </div>
-        <div>{loading ? `Carregando...` : <button onClick={logout}>Sair</button>}</div>
-      </ProfileStyled>
+      )}
     </div>
   );
 }
