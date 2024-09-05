@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { TweetContext } from '../../contexts/TweetsContext';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import TweetType from '../../types/tweetType';
+import TweetType from '../../types/TweetType';
 
 interface TweetsProps {
   user: boolean;

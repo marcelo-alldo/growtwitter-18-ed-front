@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { doDel, doPost } from '../../services/api';
-import TweetType from '../../types/tweetType';
+import TweetType from '../../types/TweetType';
 
 interface HeartTweetProps {
   enable: boolean;
