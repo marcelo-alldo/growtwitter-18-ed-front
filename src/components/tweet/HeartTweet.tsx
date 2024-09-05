@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { doDel, doPost } from '../../services/api';
+import TweetType from '../../types/tweetType';
 
 interface HeartTweetProps {
   enable: boolean;
   getTweets: () => void;
-  tweet: any;
+  tweet: TweetType;
   likesLength: string;
 }
 
