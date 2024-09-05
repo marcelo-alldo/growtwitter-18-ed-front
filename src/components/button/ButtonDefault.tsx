@@ -1,7 +1,7 @@
 import ButtonDefaultStyled from './ButtonDefaultStyled';
 
 export interface ButtonDefaultProps {
-  label: string;
+  label?: string;
   action?: () => void;
   bigButton: boolean;
   lessRound: boolean;
@@ -9,8 +9,8 @@ export interface ButtonDefaultProps {
 
 function ButtonDefault({ action, label, bigButton, lessRound }: ButtonDefaultProps) {
   return (
-    <ButtonDefaultStyled onClick={action} bigButton={bigButton} lessRound={lessRound}>
-      {label}
+    <ButtonDefaultStyled onClick={action} type="button" bigButton={bigButton} lessRound={lessRound}>
+      {label || ''}
     </ButtonDefaultStyled>
   );
 }

@@ -1,6 +1,7 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -15,7 +16,7 @@ async function doPost(url: string, data: any, token: string) {
       return { ...response.data, auth };
     }
     return { success: false, msg: 'Post Error' };
-  } catch (error) {
+  } catch (error: any) {
     /*ESSE ERRO NÃO AFETA O CODIGO.*/
     if ((error.response.status = 401)) {
       auth = false;
@@ -35,7 +36,7 @@ async function doGet(url: string, token: string) {
       return { ...response.data, auth };
     }
     return { success: false, msg: 'Get Error', auth: true };
-  } catch (error) {
+  } catch (error: any) {
     if ((error.response.status = 401)) {
       auth = false;
     }
@@ -52,7 +53,7 @@ async function doDel(url: string, token: string) {
       return { ...response.data, auth };
     }
     return { success: false, msg: 'Post Error' };
-  } catch (error) {
+  } catch (error: any) {
     /*ESSE ERRO NÃO AFETA O CODIGO.*/
     if ((error.response.status = 401)) {
       auth = false;
