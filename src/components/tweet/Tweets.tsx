@@ -9,6 +9,8 @@ import { TweetContext } from '../../contexts/TweetsContext';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getTweetsFromRedux } from '../../store/models/tweetsSlice';
 
 interface TweetsProps {
   user: boolean;
@@ -19,16 +21,24 @@ function Tweets({ user }: TweetsProps) {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const date = new Date();
   const timestamp = date.toISOString();
+  const dispatch = useAppDispatch();
+  const tweetsRedux = useAppSelector(state => state.tweets);
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
   async function getTweets() {
     const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
 
-    if (response.success) {
-      setTweets(response.data);
-    }
-  }
+  //   if (response.success) {
+  //     setTweets(response.data);
+  //   }
+  // }
+
+  useEffect(() => {
+    dispatch(getTweetsFromRedux())
+    console.log('BUSCOU OS TWEETS DO REDUX');
+    
+  }, [])
 
   useEffect(() => {
     if (userLogged.token) {
@@ -75,4 +85,5 @@ function Tweets({ user }: TweetsProps) {
     </>
   );
 }
+
 export default Tweets;

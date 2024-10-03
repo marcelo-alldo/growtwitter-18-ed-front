@@ -33,7 +33,7 @@ async function doGet(url: string, token: string) {
     });
     if (response.status === 200) {
       auth = true;
-      return { ...response.data, auth };
+      return [response.data, auth];
     }
     return { success: false, msg: 'Get Error', auth: true };
   } catch (error: any) {
