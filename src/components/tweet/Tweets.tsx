@@ -9,6 +9,8 @@ import { TweetContext } from '../../contexts/TweetsContext';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getTweetsFromRedux } from '../../store/models/tweetsSlice';
 
 interface TweetsProps {
   user: boolean;
@@ -19,6 +21,8 @@ function Tweets({ user }: TweetsProps) {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const date = new Date();
   const timestamp = date.toISOString();
+  const dispatch = useAppDispatch();
+  const tweetsRedux = useAppSelector(state => state.tweets);
 
   const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
 
@@ -29,6 +33,11 @@ function Tweets({ user }: TweetsProps) {
       setTweets(response.data);
     }
   }
+
+  useEffect(() => {
+    dispatch(getTweetsFromRedux(userLogged.token));
+    console.log(tweetsRedux);
+  }, []);
 
   useEffect(() => {
     if (userLogged.token) {
@@ -75,4 +84,5 @@ function Tweets({ user }: TweetsProps) {
     </>
   );
 }
+
 export default Tweets;
