@@ -4,8 +4,9 @@ import { doGet } from '../../services/api';
 
 export const getTweetsFromRedux = createAsyncThunk('tweets/getTweets', async () => {
   const response = await doGet('/tweets', '');
+  console.log(response);
 
-  return response;
+  return [];
 });
 
 const initialState: TweetType[] = [];
@@ -20,11 +21,11 @@ const tweetsSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(getTweets.fulfilled, (state, action) => {
+    builder.addCase(getTweetsFromRedux.fulfilled, (state, action) => {
       state.tweets = action.payload;
       return state;
     });
-    builder.addCase(getTweets.rejected, state => {
+    builder.addCase(getTweetsFromRedux.rejected, state => {
       console.log('DEU RUIM');
       return state;
     });

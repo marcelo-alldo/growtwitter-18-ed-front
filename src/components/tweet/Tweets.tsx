@@ -29,16 +29,15 @@ function Tweets({ user }: TweetsProps) {
   async function getTweets() {
     const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
 
-  //   if (response.success) {
-  //     setTweets(response.data);
-  //   }
-  // }
+    if (response.success) {
+      setTweets(response.data);
+    }
+  }
 
   useEffect(() => {
-    dispatch(getTweetsFromRedux())
-    console.log('BUSCOU OS TWEETS DO REDUX');
-    
-  }, [])
+    dispatch(getTweetsFromRedux());
+    console.log('BUSCOU OS TWEETS DO REDUX', tweetsRedux);
+  }, []);
 
   useEffect(() => {
     if (userLogged.token) {
