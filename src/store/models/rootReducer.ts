@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import userTweetsSlice from './userTweetsSlice';
 
 export default combineReducers({
-  // ADD REDOCERS AQ
+  userTweet: userTweetsSlice
 });
