@@ -35,8 +35,8 @@ function Tweets({ user }: TweetsProps) {
   }
 
   useEffect(() => {
-    dispatch(getTweetsFromRedux());
-    console.log('BUSCOU OS TWEETS DO REDUX', tweetsRedux);
+    dispatch(getTweetsFromRedux(userLogged.token));
+    console.log(tweetsRedux);
   }, []);
 
   useEffect(() => {
