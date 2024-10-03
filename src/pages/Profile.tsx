@@ -8,6 +8,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Tweets from '../components/tweet/Tweets';
 import { doGet } from '../services/api';
 import { CircularProgress } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { getUserTweet } from '../store/models/userTweetsSlice';
 
 function Profile() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -23,6 +25,20 @@ function Profile() {
     navigation: true,
     footer: true,
   };
+
+  const dispatch = useAppDispatch()
+  const selector = useAppSelector(state => state.userTweet)
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(getUserTweet({userId, token}));
+    console.log(selector);
+    }, 2000);
+    
+  }, []);
+
+  
+  
 
   async function getInfos() {
     setLoading(true);
