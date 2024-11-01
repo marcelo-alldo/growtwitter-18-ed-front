@@ -10,6 +10,7 @@ import { doGet } from '../services/api';
 import { CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getUserTweet } from '../store/models/userTweetsSlice';
+import * as jwt from 'jsonwebtoken';
 
 function Profile() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,19 +27,16 @@ function Profile() {
     footer: true,
   };
 
-  const dispatch = useAppDispatch()
-  const selector = useAppSelector(state => state.userTweet)
+  const dispatch = useAppDispatch();
+  const selector = useAppSelector(state => state.userTweet);
+  const selectorLogin = useAppSelector(state => state.userLogin);
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(getUserTweet({userId, token}));
-    console.log(selector);
+      dispatch(getUserTweet({ userId, token }));
+      console.log(selector);
     }, 2000);
-    
   }, []);
-
-  
-  
 
   async function getInfos() {
     setLoading(true);
@@ -62,17 +60,15 @@ function Profile() {
   }, [userId, token]);
 
   useEffect(() => {
-    const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
-
-    if (!userLogged.id) {
+    if (!selectorLogin.token) {
       navigate('/login');
-      return;
-    }
 
-    setUserId(userLogged.id);
-    setToken(userLogged.token);
-    setUserIdAvatar(userLogged.id.replace(/[^0-9\.]+/g, ''));
-  }, []);
+      const decoded = jwt.decode(selectorLogin.token) as { id: string; email: string };
+      setUserId(decoded?.id);
+      setToken(selectorLogin.token);
+      setUserIdAvatar(decoded?.id.replace(/[^0-9\.]+/g, ''));
+    }
+  }, [selectorLogin.token, navigate]);
 
   return (
     <DefaultLayout config={config}>

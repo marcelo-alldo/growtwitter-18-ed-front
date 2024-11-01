@@ -1,28 +1,52 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as jwt from 'jsonwebtoken';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { doPost } from '../../services/api';
 
 interface LoginSliceType {
-  token: string;
   email: string;
-  id: string;
+  password: string;
 }
 
-const initalState: LoginSliceType = {
-  email: '',
-  id: '',
-  token: ''
-}
+const initialState: string = '';
+
+export const userLogin = createAsyncThunk('users/userLogin', async (data: LoginSliceType) => {
+  try {
+    const response = await doPost('/auth', { email: data.email, password: data.password }, '');
+
+    if (response.success) {
+      return response.data.token;
+    }
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+});
 
 const loginSlice = createSlice({
   name: 'userLogin',
-  initalState,
+  initialState: { token: initialState, loading: false },
   reducers: {
-    addLoginUser: (state, action: PayloadAction<LoginSliceType>) => {
-      state = action.payload;
+    logoutUser: state => {
+      state.token = initialState;
     },
-    logoutUser: (state) => {
-      state = ''
-    } 
+  },
+  extraReducers(builder) {
+    builder.addCase(userLogin.fulfilled, (state, action) => {
+      state = action.payload;
+      state.loading = false;
+      return state;
+    });
+    builder.addCase(userLogin.pending, state => {
+      state.loading = true;
+      return state;
+    });
+    builder.addCase(userLogin.rejected, state => {
+      console.log('DEU RUIM');
+      state.loading = false;
+      return state;
+    });
+  },
+});
 
-  }
-})
+export const { logoutUser } = loginSlice.actions;
+export default loginSlice.reducer;
