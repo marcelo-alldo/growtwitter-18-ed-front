@@ -1,19 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doPost } from '../../services/api';
 
-interface LoginSliceType {
+interface LoginType {
   email: string;
   password: string;
 }
 
-const initialState: string = '';
+interface UserSliceType {
+  token: string;
+  id: string;
+}
 
-export const userLogin = createAsyncThunk('users/userLogin', async (data: LoginSliceType) => {
+const initialState: UserSliceType = { token: '', id: '' };
+
+export const userLogin = createAsyncThunk('users/userLogin', async (data: LoginType) => {
   try {
     const response = await doPost('/auth', { email: data.email, password: data.password }, '');
 
     if (response.success) {
-      return response.data.token;
+      return response;
     }
 
     return response;
@@ -24,15 +29,18 @@ export const userLogin = createAsyncThunk('users/userLogin', async (data: LoginS
 
 const loginSlice = createSlice({
   name: 'userLogin',
-  initialState: { token: initialState, loading: false },
+  initialState: { user: initialState, loading: false },
   reducers: {
     logoutUser: state => {
-      state.token = initialState;
+      state.user = initialState;
     },
   },
   extraReducers(builder) {
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      state = action.payload;
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA', action.payload);
+
+      state.user.token = action.payload.data.token;
+      state.user.id = action.payload.id;
       state.loading = false;
       return state;
     });

@@ -23,11 +23,10 @@ function Tweets({ user }: TweetsProps) {
   const timestamp = date.toISOString();
   const dispatch = useAppDispatch();
   const tweetsRedux = useAppSelector(state => state.tweets);
-
-  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
+  const userSelector = useAppSelector(state => state.userLogin);
 
   async function getTweets() {
-    const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
+    const response = await doGet(`/tweet/${user ? userSelector.user.id : ''}`, `${userSelector.user.token}`);
 
     if (response.success) {
       setTweets(response.data);
@@ -35,12 +34,12 @@ function Tweets({ user }: TweetsProps) {
   }
 
   useEffect(() => {
-    dispatch(getTweetsFromRedux(userLogged.token));
+    dispatch(getTweetsFromRedux(userSelector.user.token));
     console.log(tweetsRedux);
   }, []);
 
   useEffect(() => {
-    if (userLogged.token) {
+    if (userSelector.user.token) {
       getTweets();
     }
   }, []);
@@ -72,7 +71,7 @@ function Tweets({ user }: TweetsProps) {
                   <HeartTweet
                     getTweets={getTweets}
                     tweet={item}
-                    enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
+                    enable={item.likes.find(like => like.userId === userSelector.user.id) ? true : false}
                     likesLength={`${item.likes.length}`}
                   />
                 </div>

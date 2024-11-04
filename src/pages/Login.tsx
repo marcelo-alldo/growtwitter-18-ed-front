@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoginInputStyled from '../components/login-and-create-account/LoginInputStyled';
 import ButtonDefault from '../components/button/ButtonDefault';
 import H2Styled from '../components/login-and-create-account/H2Styled';
@@ -31,16 +31,19 @@ function Login() {
     }
 
     dispatch(userLogin({ email, password }));
-
-    if (selector.token !== '') {
-      navigate('/');
-    } else {
-      toast.error('Email e/ou senha incorretos.', {
-        position: 'top-center',
-        autoClose: 2000,
-      });
-    }
   }
+
+  useEffect(() => {
+    if (selector.user.token !== '') {
+      navigate('/');
+    }
+    // else {
+    //   toast.error('Email e/ou senha incorretos.', {
+    //     position: 'top-center',
+    //     autoClose: 2000,
+    //   });
+    // }
+  }, [selector]);
 
   return (
     <LayoutStyled>

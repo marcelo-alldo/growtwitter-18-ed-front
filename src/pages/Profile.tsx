@@ -10,15 +10,12 @@ import { doGet } from '../services/api';
 import { CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getUserTweet } from '../store/models/userTweetsSlice';
-import * as jwt from 'jsonwebtoken';
 
 function Profile() {
   const [loading, setLoading] = useState<boolean>(true);
   const [tweetsNumber, setTweetsNumber] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userUsername, setUserUsername] = useState<string>('');
-  const [userId, setUserId] = useState<string>('');
-  const [token, setToken] = useState<string>('');
   const [userIdAvatar, setUserIdAvatar] = useState<string>('');
   const navigate = useNavigate();
 
@@ -33,15 +30,15 @@ function Profile() {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(getUserTweet({ userId, token }));
+      dispatch(getUserTweet({ userId: selectorLogin.user.id, token: selectorLogin.user.token }));
       console.log(selector);
     }, 2000);
   }, []);
 
   async function getInfos() {
     setLoading(true);
-    const responseTweets = await doGet(`/tweet/${userId}`, `${token}`);
-    const responseUser = await doGet(`/users/${userId}`, `${token}`);
+    const responseTweets = await doGet(`/tweet/${selectorLogin.user.id}`, `${selectorLogin.user.token}`);
+    const responseUser = await doGet(`/users/${selectorLogin.user.id}`, `${selectorLogin.user.token}`);
 
     if (responseTweets.success && responseUser.success) {
       setTweetsNumber(responseTweets.data.length);
@@ -54,21 +51,18 @@ function Profile() {
   }
 
   useEffect(() => {
-    if (userId && token) {
+    if (selectorLogin.user.id && selectorLogin.user.token) {
       getInfos();
     }
-  }, [userId, token]);
+  }, [selectorLogin.user]);
 
   useEffect(() => {
-    if (!selectorLogin.token) {
+    if (!selectorLogin.user.token) {
       navigate('/login');
 
-      const decoded = jwt.decode(selectorLogin.token) as { id: string; email: string };
-      setUserId(decoded?.id);
-      setToken(selectorLogin.token);
-      setUserIdAvatar(decoded?.id.replace(/[^0-9\.]+/g, ''));
+      setUserIdAvatar(selectorLogin.user.id.replace(/[^0-9.]+/g, ''));
     }
-  }, [selectorLogin.token, navigate]);
+  }, [selectorLogin.user.token, navigate]);
 
   return (
     <DefaultLayout config={config}>
