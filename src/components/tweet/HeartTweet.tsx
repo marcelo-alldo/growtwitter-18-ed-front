@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { doDel, doPost } from '../../services/api';
 import TweetType from '../../types/TweetType';
+import { useAppSelector } from '../../store/hooks';
 
 interface HeartTweetProps {
   enable: boolean;
@@ -11,16 +12,16 @@ interface HeartTweetProps {
 
 function HeartTweet({ enable, getTweets, tweet, likesLength }: HeartTweetProps) {
   const [loading, setLoading] = useState<boolean>(false);
+  const userSelector = useAppSelector(state => state.userLogin);
 
   async function like() {
-    const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
-    const userLike = tweet.likes.find(like => like.userId === userLogged.id);
+    const userLike = tweet.likes.find(like => like.userId === userSelector.user.id);
     setLoading(true);
 
     if (userLike) {
-      await doDel(`/like/${userLike.id}`, userLogged.token);
+      await doDel(`/like/${userLike.id}`, userSelector.user.token);
     } else {
-      await doPost(`/like`, { tweetId: tweet.id, userId: userLogged.id }, userLogged.token);
+      await doPost(`/like`, { tweetId: tweet.id, userId: userSelector.user.id }, userSelector.user.token);
     }
 
     setTimeout(() => {

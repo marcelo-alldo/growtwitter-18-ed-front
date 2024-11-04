@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoginInputStyled from '../components/login-and-create-account/LoginInputStyled';
 import ButtonDefault from '../components/button/ButtonDefault';
 import H2Styled from '../components/login-and-create-account/H2Styled';
 import LabelStyled from '../components/login-and-create-account/LabelStyled';
 import { useNavigate } from 'react-router-dom';
-import { doPost } from '../services/api';
 import BlueCardStyled from '../components/login-and-create-account/BlueCardStyled';
 import WhiteCardStyled from '../components/login-and-create-account/WhiteCardStyled';
 import PStyled from '../components/login-and-create-account/PStyled';
@@ -13,12 +12,15 @@ import LayoutStyled from '../components/login-and-create-account/LayoutStyled';
 import SmallStyled from '../components/login-and-create-account/SmallStyled';
 import Links from '../components/login-and-create-account/LinksCreatandLogin';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { userLogin } from '../store/models/loginSlice';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const selector = useAppSelector(state => state.userLogin);
 
   async function handleLogin() {
     if (!email || !password) {
@@ -28,27 +30,20 @@ function Login() {
       });
     }
 
-    setLoading(true);
-    const response = await doPost('/auth', { email, password }, '');
-
-    setLoading(false);
-    if (response.success) {
-      const dataLogin = {
-        email,
-        token: response.data.token,
-        id: response.id,
-      };
-
-      localStorage.setItem('userLogged', JSON.stringify(dataLogin));
-
-      navigate('/');
-    } else {
-      toast.error('Email e/ou senha incorretos.', {
-        position: 'top-center',
-        autoClose: 2000,
-      });
-    }
+    dispatch(userLogin({ email, password }));
   }
+
+  useEffect(() => {
+    if (selector.user.token !== '') {
+      navigate('/');
+    }
+    // else {
+    //   toast.error('Email e/ou senha incorretos.', {
+    //     position: 'top-center',
+    //     autoClose: 2000,
+    //   });
+    // }
+  }, [selector]);
 
   return (
     <LayoutStyled>
@@ -70,7 +65,7 @@ function Login() {
             <LabelStyled htmlFor="password">Senha</LabelStyled>
             <LoginInputStyled type="password" value={password} onChange={ev => setPassword(ev.target.value)} />
           </div>
-          {loading ? (
+          {selector.loading ? (
             `Carregando...`
           ) : (
             <ButtonDefault label="Entrar" action={handleLogin} bigButton={true} lessRound={true} />
