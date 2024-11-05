@@ -1,6 +1,7 @@
 import TweetStyled from './TweetStyled';
 import { doGet } from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
+import retweet from '../../../public/icone_retweet.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
@@ -54,7 +55,7 @@ function Tweets({ user }: TweetsProps) {
         {tweets.map(item => {
           return (
             <TweetDivStyled key={item.id}>
-              <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9\.]+/g, '')} />
+              <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9.]+/g, '')} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <b>{item.user.name}</b>
@@ -74,6 +75,10 @@ function Tweets({ user }: TweetsProps) {
                     enable={item.likes.find(like => like.userId === userSelector.user.id) ? true : false}
                     likesLength={`${item.likes.length}`}
                   />
+                  <button>
+                    <img src={retweet} alt="retweet" />
+                    <p>0</p>
+                  </button>
                 </div>
               </div>
             </TweetDivStyled>
