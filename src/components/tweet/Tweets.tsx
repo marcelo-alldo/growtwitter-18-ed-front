@@ -5,7 +5,7 @@ import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
 import { useEffect, useState } from 'react';
-import { formatDistance, set } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
