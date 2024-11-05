@@ -17,16 +17,17 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { TweetContext } from '../../contexts/TweetsContext';
 import { CircularProgress } from '@mui/material';
+import { useAppSelector } from '../../store/hooks';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
   const [user, setUser] = useState<any>([]);
   const navigate = useNavigate();
-  const userLocal = JSON.parse(localStorage.getItem('userLogged') || '{}');
   const [loading, setLoading] = useState<boolean>(false);
   const tweetContext = useContext(TweetContext);
   const [showAvatar, setShowAvatar] = useState<boolean>(false);
+  const userSelector = useAppSelector(state => state.userLogin);
 
   function showModal() {
     setShow(!show);
@@ -35,7 +36,7 @@ function MenuNavigation() {
   async function sendTweet() {
     try {
       setLoading(true);
-      const response = await doPost('/tweet', { content: value }, userLocal.token);
+      const response = await doPost('/tweet', { content: value }, userSelector.user.token);
 
       setLoading(false);
       if (response.success) {
@@ -57,9 +58,9 @@ function MenuNavigation() {
 
   async function getUser() {
     setLoading(true);
-    const response = await doGet(`/users/${userLocal.id}`, userLocal.token);
+    const response = await doGet(`/users/${userSelector.user.id}`, userSelector.user.token);
     if (response.success) {
-      response.data.id = response.data.id.replace(/[^0-9\.]+/g, '');
+      response.data.id = response.data.id.replace(/[^0-9.]+/g, '');
       setUser(response.data);
       setShowAvatar(true);
     }
@@ -73,7 +74,7 @@ function MenuNavigation() {
   }
 
   useEffect(() => {
-    if (userLocal.token) {
+    if (userSelector.user.token) {
       getUser();
     }
   }, []);

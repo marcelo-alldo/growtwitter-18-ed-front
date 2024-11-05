@@ -9,6 +9,8 @@ import { TweetContext } from '../../contexts/TweetsContext';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getTweetsFromRedux } from '../../store/models/tweetsSlice';
 
 interface TweetsProps {
   user: boolean;
@@ -19,11 +21,12 @@ function Tweets({ user }: TweetsProps) {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const date = new Date();
   const timestamp = date.toISOString();
-
-  const userLogged = JSON.parse(localStorage.getItem('userLogged') || '{}');
+  const dispatch = useAppDispatch();
+  const tweetsRedux = useAppSelector(state => state.tweets);
+  const userSelector = useAppSelector(state => state.userLogin);
 
   async function getTweets() {
-    const response = await doGet(`/tweet/${user ? userLogged.id : ''}`, `${userLogged.token}`);
+    const response = await doGet(`/tweet/${user ? userSelector.user.id : ''}`, `${userSelector.user.token}`);
 
     if (response.success) {
       setTweets(response.data);
@@ -31,7 +34,12 @@ function Tweets({ user }: TweetsProps) {
   }
 
   useEffect(() => {
-    if (userLogged.token) {
+    dispatch(getTweetsFromRedux(userSelector.user.token));
+    console.log(tweetsRedux);
+  }, []);
+
+  useEffect(() => {
+    if (userSelector.user.token) {
       getTweets();
     }
   }, []);
@@ -63,7 +71,7 @@ function Tweets({ user }: TweetsProps) {
                   <HeartTweet
                     getTweets={getTweets}
                     tweet={item}
-                    enable={item.likes.find(like => like.userId === userLogged.id) ? true : false}
+                    enable={item.likes.find(like => like.userId === userSelector.user.id) ? true : false}
                     likesLength={`${item.likes.length}`}
                   />
                 </div>
@@ -75,4 +83,5 @@ function Tweets({ user }: TweetsProps) {
     </>
   );
 }
+
 export default Tweets;

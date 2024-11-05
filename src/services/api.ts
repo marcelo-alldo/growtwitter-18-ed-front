@@ -10,7 +10,7 @@ const api = axios.create({
 async function doPost(url: string, data: any, token: string) {
   let auth = false;
   try {
-    const response = await api.post(url, data, { headers: { Authorization: token } });
+    const response = await api.post(url, data, { headers: { Authorization: 'Bearer ' + token } });
     if (response.status === 200) {
       auth = true;
       return { ...response.data, auth };
@@ -29,7 +29,7 @@ async function doGet(url: string, token: string) {
   let auth = false;
   try {
     const response = await api.get(url, {
-      headers: { Authorization: token },
+      headers: { Authorization: 'Bearer ' + token },
     });
     if (response.status === 200) {
       auth = true;
@@ -47,7 +47,7 @@ async function doGet(url: string, token: string) {
 async function doDel(url: string, token: string) {
   let auth = false;
   try {
-    const response = await api.delete(url, { headers: { Authorization: token } });
+    const response = await api.delete(url, { headers: { Authorization: 'Bearer ' + token } });
     if (response.status === 200) {
       auth = true;
       return { ...response.data, auth };
