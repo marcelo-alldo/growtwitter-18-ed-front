@@ -78,7 +78,7 @@ function CreateAccount() {
           {loading ? (
             `Carregando...`
           ) : (
-            <ButtonDefault label="Entrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
+            <ButtonDefault label="Cadastrar" action={handleCreateAccount} bigButton={true} lessRound={true} />
           )}
           <Links href="login" text="Já tem uma conta? Faça o login!" />
         </WhiteCardStyled>
