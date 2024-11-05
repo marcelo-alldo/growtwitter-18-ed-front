@@ -1,12 +1,10 @@
 import TweetStyled from './TweetStyled';
-import { doGet } from '../../services/api';
 import commentTweet from '../../../public/icone_responder.svg';
 import retweet from '../../../public/icone_retweet.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
-import { useContext, useEffect, useState } from 'react';
-import { TweetContext } from '../../contexts/TweetsContext';
+import { useEffect, useState } from 'react';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
@@ -18,7 +16,6 @@ interface TweetsProps {
 }
 
 function Tweets({ user }: TweetsProps) {
-  const tweetContext = useContext(TweetContext);
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const date = new Date();
   const timestamp = date.toISOString();
@@ -26,17 +23,12 @@ function Tweets({ user }: TweetsProps) {
   const tweetsRedux = useAppSelector(state => state.tweets);
   const userSelector = useAppSelector(state => state.userLogin);
 
-  async function getTweets() {
-    const response = await doGet(`/tweet/${user ? userSelector.user.id : ''}`, `${userSelector.user.token}`);
-
-    if (response.success) {
-      setTweets(response.data);
-    }
-  }
+  const getTweets = () => {
+    setTweets(tweetsRedux.tweets.data);
+  };
 
   useEffect(() => {
-    dispatch(getTweetsFromRedux(userSelector.user.token));
-    console.log(tweetsRedux);
+    dispatch(getTweetsFromRedux({ token: userSelector.user.token, userId: user ? userSelector.user.id : '' }));
   }, []);
 
   useEffect(() => {
@@ -47,7 +39,11 @@ function Tweets({ user }: TweetsProps) {
 
   useEffect(() => {
     getTweets();
-  }, [tweetContext]);
+  }, [tweetsRedux]);
+
+  const handleRetweet = (tweet: TweetType) => {
+    console.log(tweet);
+  };
 
   return (
     <>
@@ -75,7 +71,7 @@ function Tweets({ user }: TweetsProps) {
                     enable={item.likes.find(like => like.userId === userSelector.user.id) ? true : false}
                     likesLength={`${item.likes.length}`}
                   />
-                  <button>
+                  <button onClick={() => handleRetweet(item)}>
                     <img src={retweet} alt="retweet" />
                     <p>0</p>
                   </button>
