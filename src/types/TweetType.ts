@@ -14,6 +14,21 @@ interface TweetType {
       tweetId: string;
     },
   ];
+  replies: [
+    {
+      content: string;
+      createdAt: string;
+      id: string;
+      tweetId: string;
+      tweetType: string;
+      updatedAt: string;
+      userId: string;
+      user: {
+        name: string;
+        username: string;
+      };
+    },
+  ];
 }
 
 export default TweetType;
