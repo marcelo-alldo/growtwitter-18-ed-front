@@ -16,7 +16,6 @@ function Profile() {
   const [tweetsNumber, setTweetsNumber] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userUsername, setUserUsername] = useState<string>('');
-  const [userIdAvatar, setUserIdAvatar] = useState<string>('');
   const navigate = useNavigate();
 
   const config = {
@@ -59,8 +58,6 @@ function Profile() {
   useEffect(() => {
     if (!selectorLogin.user.token) {
       navigate('/login');
-
-      setUserIdAvatar(selectorLogin.user.id.replace(/[^0-9.]+/g, ''));
     }
   }, [selectorLogin.user.token, navigate]);
 
@@ -138,7 +135,7 @@ function Profile() {
                 alignItems: 'start',
               }}
             >
-              <Avatar useBorder={true} src={userIdAvatar} useWidth={false} />
+              <Avatar useBorder={true} src={selectorLogin.user.id.replace(/[^0-9.]+/g, '')} useWidth={false} />
               <p style={{ margin: '0px', fontWeight: '500' }}>{userName}</p>
               <p style={{ margin: '0px', fontWeight: '500' }}>@{userUsername}</p>
             </div>
