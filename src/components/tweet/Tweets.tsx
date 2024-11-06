@@ -4,7 +4,7 @@ import retweet from '../../../public/icone_retweet.svg';
 import TweetDivStyled from './TweetDivStyled';
 import HeartTweet from './HeartTweet';
 import Avatar from '../Avatar';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
@@ -29,9 +29,9 @@ function Tweets({ user }: TweetsProps) {
   const [tweet, setTweet] = useState<TweetType>();
   const replySelector = useAppSelector(state => state.reply);
 
-  const getTweets = () => {
+  const getTweets = useCallback(() => {
     setTweets(tweetsRedux.tweets.data);
-  };
+  }, [tweetsRedux]);
 
   useEffect(() => {
     dispatch(getTweetsFromRedux({ token: userSelector.user.token, userId: user ? userSelector.user.id : '' }));
@@ -45,7 +45,7 @@ function Tweets({ user }: TweetsProps) {
 
   useEffect(() => {
     getTweets();
-  }, [tweetsRedux, dispatch]);
+  }, [tweetsRedux, dispatch, getTweets]);
 
   const handleRetweet = () => {
     if (!tweet) return;
