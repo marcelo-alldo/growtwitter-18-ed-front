@@ -83,13 +83,13 @@ function Tweets({ user }: TweetsProps) {
         {tweets.map(item => {
           return (
             <>
-              <TweetDivStyled key={item.id}>
-                <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9.]+/g, '')} />
+              <TweetDivStyled key={item?.id}>
+                <Avatar useBorder={false} useWidth={true} src={item?.userId?.replace(/[^0-9.]+/g, '')} />
                 <div>
                   <div style={{ display: 'flex', gap: '10px' }}>
-                    <b>{item.user.name}</b>
+                    <b>{item?.user?.name}</b>
                     <p>
-                      @{item.user.username} • {formatDistance(item.createdAt, timestamp, { locale: ptBR })}
+                      @{item?.user?.username} • {formatDistance(item?.createdAt, timestamp, { locale: ptBR })}
                     </p>
                   </div>
                   <p>{item.content}</p>
@@ -101,8 +101,8 @@ function Tweets({ user }: TweetsProps) {
                     <HeartTweet
                       getTweets={getTweets}
                       tweet={item}
-                      enable={item.likes.find(like => like.userId === userSelector.user.id) ? true : false}
-                      likesLength={`${item.likes.length}`}
+                      enable={item?.likes?.find(like => like?.userId === userSelector?.user?.id) ? true : false}
+                      likesLength={`${item?.likes?.length}`}
                     />
                     <button
                       onClick={() => {
@@ -111,13 +111,13 @@ function Tweets({ user }: TweetsProps) {
                       }}
                     >
                       <img src={retweet} alt="retweet" />
-                      <p>{item.replies.length}</p>
+                      <p>{item?.replies?.length}</p>
                     </button>
                   </div>
                 </div>
               </TweetDivStyled>
-              {item.replies
-                ? item.replies.map(reply => (
+              {item?.replies
+                ? item?.replies?.map(reply => (
                     <TweetDivStyled>
                       <div
                         style={{
@@ -127,15 +127,15 @@ function Tweets({ user }: TweetsProps) {
                           borderLeft: '1px solid #b0b0b0',
                         }}
                       >
-                        <Avatar useBorder={false} useWidth={true} src={reply.userId.replace(/[^0-9.]+/g, '')} />
+                        <Avatar useBorder={false} useWidth={true} src={reply?.userId?.replace(/[^0-9.]+/g, '')} />
                         <div>
                           <div style={{ display: 'flex', gap: '10px' }}>
-                            <b>{reply.user.name}</b>
+                            <b>{reply?.user?.name}</b>
                             <p>
-                              @{reply.user.username} • {formatDistance(reply.createdAt, timestamp, { locale: ptBR })}
+                              @{reply?.user?.username} • {formatDistance(reply?.createdAt, timestamp, { locale: ptBR })}
                             </p>
                           </div>
-                          <p>{reply.content}</p>
+                          <p>{reply?.content}</p>
                         </div>
                       </div>
                     </TweetDivStyled>

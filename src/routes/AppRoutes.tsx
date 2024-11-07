@@ -10,7 +10,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-    errorElement: <Error404 />,
+    // errorElement: <Error404 />,
   },
   {
     path: '/profile',
@@ -23,7 +23,6 @@ const router = createBrowserRouter([
   {
     path: '/explore',
     element: <Explore />,
-    errorElement: <Error404 />,
   },
   {
     path: '/create-account',

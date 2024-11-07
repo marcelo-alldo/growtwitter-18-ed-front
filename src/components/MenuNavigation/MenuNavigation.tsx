@@ -18,6 +18,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import { TweetContext } from '../../contexts/TweetsContext';
 import { CircularProgress } from '@mui/material';
 import { useAppSelector } from '../../store/hooks';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../store/models/loginSlice';
 
 function MenuNavigation() {
   const [show, setShow] = useState<boolean>(false);
@@ -67,9 +69,10 @@ function MenuNavigation() {
     setLoading(false);
     return;
   }
+  const dispatch = useDispatch();
 
   function logout() {
-    localStorage.removeItem('userLogged');
+    dispatch(logoutUser());
     navigate('/login');
   }
 
