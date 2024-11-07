@@ -37,21 +37,18 @@ const loginSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA', action.payload);
-
-      state.user.token = action.payload.data.token;
-      state.user.id = action.payload.id;
+      if (action.payload?.data?.token) {
+        state.user.token = action.payload.data.token;
+        state.user.id = action.payload.data.id;
+      } else {
+        console.error('Erro de autenticação:', action.payload?.msg || 'Erro desconhecido');
+      }
       state.loading = false;
-      return state;
     });
-    builder.addCase(userLogin.pending, state => {
-      state.loading = true;
-      return state;
-    });
+
     builder.addCase(userLogin.rejected, state => {
       console.log('DEU RUIM');
       state.loading = false;
-      return state;
     });
   },
 });

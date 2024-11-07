@@ -28,22 +28,24 @@ function Login() {
         position: 'top-center',
         autoClose: 2000,
       });
+      return;
     }
 
-    dispatch(userLogin({ email, password }));
+    const disparo = await dispatch(userLogin({ email, password }));
+
+    if (disparo.payload?.auth === false) {
+      toast.error('Erro de autenticação. Verifique seu email ou senha.', {
+        position: 'top-center',
+        autoClose: 2000,
+      });
+    }
   }
 
   useEffect(() => {
-    if (selector.user.token !== '') {
+    if (selector.user.token) {
       navigate('/');
     }
-    // else {
-    //   toast.error('Email e/ou senha incorretos.', {
-    //     position: 'top-center',
-    //     autoClose: 2000,
-    //   });
-    // }
-  }, [selector]);
+  }, [selector.user.token, navigate]);
 
   return (
     <LayoutStyled>

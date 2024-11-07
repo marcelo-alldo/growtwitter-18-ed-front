@@ -28,6 +28,7 @@ function CreateAccount() {
         position: 'top-center',
         autoClose: 2000,
       });
+      return;
     }
 
     setLoading(true);
