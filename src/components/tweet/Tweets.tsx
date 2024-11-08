@@ -11,6 +11,8 @@ import { ptBR } from 'date-fns/locale';
 import TweetType from '../../types/TweetType';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getTweetsFromRedux } from '../../store/models/tweetsSlice';
+import ModalFollowers from '../followers/ModalFollowers';
+import { Button } from '@mui/material';
 
 interface TweetsProps {
   user: boolean;
@@ -24,7 +26,12 @@ function Tweets({ user }: TweetsProps) {
   const dispatch = useAppDispatch();
   const tweetsRedux = useAppSelector(state => state.tweets);
   const userSelector = useAppSelector(state => state.userLogin);
-
+  const [open, setOpen] = useState<boolean>(false);
+  const [userData, setUserData] = useState<{ name: string; username: string; id: string }>({
+    name: '',
+    username: '',
+    id: '',
+  });
   async function getTweets() {
     const response = await doGet(`/tweet/${user ? userSelector.user.id : ''}`, `${userSelector.user.token}`);
 
@@ -51,9 +58,18 @@ function Tweets({ user }: TweetsProps) {
   return (
     <>
       <TweetStyled>
+        <ModalFollowers open={open} setOpen={setOpen} user={userData} />
         {tweets.map(item => {
           return (
             <TweetDivStyled key={item.id}>
+              <Button
+                onClick={() => {
+                  setUserData({ id: item.userId, name: item.user.name, username: item.user.username });
+                  setOpen(true);
+                }}
+              >
+                MODAL
+              </Button>
               <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9\.]+/g, '')} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
