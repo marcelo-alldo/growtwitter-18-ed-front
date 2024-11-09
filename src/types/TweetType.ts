@@ -2,8 +2,11 @@ interface TweetType {
   id: string;
   userId: string;
   user: {
-    username: string;
+    id: string;
     name: string;
+    username: string;
+    follower: { id: string; userId: string; followerId: string }[];
+    following: { id: string; userId: string; followerId: string }[];
   };
   createdAt: Date;
   content: string;

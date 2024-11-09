@@ -12,9 +12,19 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getTweetsFromRedux } from '../../store/models/tweetsSlice';
 import Modal from '../modal/Modal';
 import { postReplyFromRedux } from '../../store/models/replySlice';
+import ModalFollowers from '../followers/ModalFollowers';
+import { Button, ButtonBase } from '@mui/material';
 
 interface TweetsProps {
   user: boolean;
+}
+
+export interface UserTypes {
+  id: string;
+  name: string;
+  username: string;
+  follower: { id: string; userId: string; followerId: string }[];
+  following: { id: string; userId: string; followerId: string }[];
 }
 
 function Tweets({ user }: TweetsProps) {
@@ -28,6 +38,26 @@ function Tweets({ user }: TweetsProps) {
   const [value, setValue] = useState<string>('');
   const [tweet, setTweet] = useState<TweetType>();
   const replySelector = useAppSelector(state => state.reply);
+  const [open, setOpen] = useState<boolean>(false);
+  const [data, setData] = useState<UserTypes>({
+    id: '',
+    name: '',
+    username: '',
+    follower: [{ id: '', userId: '', followerId: '' }],
+    following: [{ id: '', userId: '', followerId: '' }],
+  });
+
+  const handleSetUser = (user: UserTypes) => {
+    setOpen(true);
+    setValue('');
+    setData({
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      follower: user.follower,
+      following: user.following,
+    });
+  };
 
   const getTweets = useCallback(() => {
     setTweets(tweetsRedux.tweets.data);
@@ -66,7 +96,7 @@ function Tweets({ user }: TweetsProps) {
       getTweets();
     }
   }, [replySelector]);
-
+  console.log(tweetsRedux);
   return (
     <>
       {show && (
@@ -80,11 +110,14 @@ function Tweets({ user }: TweetsProps) {
         />
       )}
       <TweetStyled>
-        {tweets.map(item => {
+        <ModalFollowers open={open} setOpen={() => setOpen(true)} user={data} />
+        {tweets?.map(item => {
           return (
             <>
               <TweetDivStyled key={item?.id}>
-                <Avatar useBorder={false} useWidth={true} src={item?.userId?.replace(/[^0-9.]+/g, '')} />
+                <ButtonBase onClick={() => handleSetUser(item.user)}>
+                  <Avatar useBorder={false} useWidth={true} src={item?.userId?.replace(/[^0-9.]+/g, '')} />
+                </ButtonBase>
                 <div>
                   <div style={{ display: 'flex', gap: '10px' }}>
                     <b>{item?.user?.name}</b>
