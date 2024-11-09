@@ -1,8 +1,6 @@
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Avatar from '../Avatar';
-import { forwardRef, ReactElement, Ref, useState } from 'react';
+import { forwardRef, ReactElement, Ref } from 'react';
 import { doDel, doPost } from '../../services/api';
 import { useAppSelector } from '../../store/hooks';
 
@@ -15,22 +13,9 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { UserTypes } from '../tweet/Tweets';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
-
 interface ModalFollowersProps {
   open: boolean;
+  getTweets: () => void;
   setOpen: (open: boolean) => void;
   user: UserTypes;
 }
@@ -44,26 +29,22 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalFollowers({ open, setOpen, user }: ModalFollowersProps) {
+export default function ModalFollowers({ open, setOpen, user, getTweets }: ModalFollowersProps) {
   const userSelector = useAppSelector(state => state.userLogin);
   const userAlreadyFollowing = user.following.find(user => user.userId === userSelector.user.id);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  console.log(userAlreadyFollowing);
+
   const handleFollowUser = async () => {
     try {
       if (userAlreadyFollowing) {
         const response = await doDel(`/follower/${userAlreadyFollowing.id}`, userSelector.user.token);
-
-        setOpen(false);
       } else {
         const response = await doPost('/follower', { id: user.id }, userSelector.user.token);
-
-        setOpen(false);
       }
     } catch (error) {
       console.error('Erro ao seguir o usuário:', error);
+    } finally {
+      setOpen(false);
+      getTweets();
     }
   };
 
@@ -74,7 +55,7 @@ export default function ModalFollowers({ open, setOpen, user }: ModalFollowersPr
           open={open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle>{'Voce deseja seguir'}</DialogTitle>

@@ -87,7 +87,6 @@ function Tweets({ user }: TweetsProps) {
   };
 
   useEffect(() => {
-    console.log(tweetsRedux);
     if (replySelector.loading === false) {
       setShow(false);
       setValue('');
@@ -96,7 +95,7 @@ function Tweets({ user }: TweetsProps) {
       getTweets();
     }
   }, [replySelector]);
-  console.log(tweetsRedux);
+
   return (
     <>
       {show && (
@@ -110,7 +109,7 @@ function Tweets({ user }: TweetsProps) {
         />
       )}
       <TweetStyled>
-        <ModalFollowers open={open} setOpen={() => setOpen(true)} user={data} />
+        <ModalFollowers open={open} setOpen={setOpen} user={data} getTweets={getTweets} />
         {tweets?.map(item => {
           return (
             <>
