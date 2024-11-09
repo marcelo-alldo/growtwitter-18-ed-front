@@ -68,9 +68,8 @@ function Tweets({ user }: TweetsProps) {
                   setOpen(true);
                 }}
               >
-                MODAL
+                <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9\.]+/g, '')} />
               </Button>
-              <Avatar useBorder={false} useWidth={true} src={item.userId.replace(/[^0-9\.]+/g, '')} />
               <div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <b>{item.user.name}</b>
